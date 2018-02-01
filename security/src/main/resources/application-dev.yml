@@ -1,0 +1,12 @@
+---
+########################## dev
+spring:
+  profiles: dev
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://127.0.0.1:3306/security?characterEncoding=UTF-8
+    username: root
+    password: root
+    driverClassName: com.mysql.jdbc.Driver
+author:
+  ignoreUrls: /,/home,/error,/v2/api-docs,/v1/security/loginFail,/v1/security/loginSuccess,/login,/swagger/**,/alarmManager/**,/v1/**/**
