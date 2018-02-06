@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import com.hc.security.entity.OperatorEntity;
 import com.hc.security.entity.RoleEntity;
@@ -17,7 +18,7 @@ import com.hc.security.entity.enums.StatusType;
 import com.hc.security.service.OperatorService;
 import com.hc.security.service.RoleService;
 
-
+@Service("customUserSecurityDetailsService")
 public class CustomUserSecurityDetailsService implements UserDetailsService {
 
   @Autowired
@@ -36,7 +37,8 @@ public class CustomUserSecurityDetailsService implements UserDetailsService {
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     /*
-     * 查找用户的处理过程描述如下： 1、首先查找代理商信息，如果没有找到就差早商户信息，如果还没有找到，就抛出异常 2、查找这个账号对应的角色信息（当然是目前还可以用的角色信息）
+     * 查找用户的处理过程描述如下： 1、首先查找代理商信息，如果没有找到就差早商户信息，如果还没有找到，就抛出异常
+     * 2、查找这个账号对应的角色信息（当然是目前还可以用的角色信息）
      * 3、构造UserDetails对象，并返回
      */
     // 查询用户基本信息
