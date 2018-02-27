@@ -1,0 +1,22 @@
+server:
+  port: 9200
+#jpa
+spring: 
+  jpa: 
+    show-sql: true
+    generate-ddl: false
+    database: MYSQL
+    hibernate: 
+      ddl-auto: update
+  # freemarker
+  freemarker: 
+    request-context-attribute: request
+    allow-request-override: false
+    cache: false
+    charset: UTF-8
+    expose-request-attributes: true
+    expose-session-attributes: true
+    suffix: .ftl
+#swagger
+swagger:
+  version: v0.0.9
