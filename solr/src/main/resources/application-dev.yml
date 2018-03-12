@@ -8,3 +8,6 @@ spring:
     username: root
     password: root
     driverClassName: com.mysql.jdbc.Driver
+solr:
+  host: http://127.0.0.1:8088/solr/
+  coreName: goods_core

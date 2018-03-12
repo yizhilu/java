@@ -28,7 +28,7 @@ public class GoodsEntity extends UuidEntity {
   /**
    * 商品描述
    */
-  @Column(name = "desc")
+  @Column(name = "desc_")
   private String desc;
   /***
    * 商品售价

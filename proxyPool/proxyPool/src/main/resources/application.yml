@@ -12,7 +12,6 @@ spring:
   freemarker: 
     request-context-attribute: request
     allow-request-override: false
-    template-loader-path: classpath:/static
     cache: false
     charset: UTF-8
     expose-request-attributes: true
