@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hc.proxyPool.common.utils.DateUtils;
+import com.hc.proxyPool.common.utils.ProxyUtils;
 import com.hc.proxyPool.entity.DynameicTaskJobEntity;
 import com.hc.proxyPool.entity.ProxyDataEntity;
 import com.hc.proxyPool.repository.ProxyDataRepository;
@@ -120,6 +121,9 @@ public class CoderbusyCrawleService extends BreadthCrawler implements Runnable {
         if (proxy != null) {
           continue;
         }
+        if (StringUtils.isBlank(ip) || StringUtils.isBlank(port)) {
+          continue;
+        }
         if ("HTTP".equals(type) || "HTTPS".equals(type)) {
           ProxyDataEntity proxyData = new ProxyDataEntity();
           proxyData.setProxyIp(ip);
@@ -132,6 +136,7 @@ public class CoderbusyCrawleService extends BreadthCrawler implements Runnable {
           proxyData.setCrawleDate(new Date());
           LOGGER.info(proxyData.toString());
           proxyDataRepository.save(proxyData);
+
         }
       }
     } catch (Exception e) {
@@ -160,7 +165,7 @@ public class CoderbusyCrawleService extends BreadthCrawler implements Runnable {
   public void run() {
     DynameicTaskJobEntity dynameicTaskJob =
         dynamicTaskJobService.findByJobName("CoderbusyCrawleService");
-    if(dynameicTaskJob!=null) {
+    if (dynameicTaskJob != null) {
       dynameicTaskJob.setLastExecutionDate(new Date());
       dynamicTaskJobService.update(dynameicTaskJob);
     }

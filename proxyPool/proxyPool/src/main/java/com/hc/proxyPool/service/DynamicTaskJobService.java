@@ -2,6 +2,9 @@ package com.hc.proxyPool.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.hc.proxyPool.entity.DynameicTaskJobEntity;
 
 public interface DynamicTaskJobService {
@@ -28,12 +31,15 @@ public interface DynamicTaskJobService {
    * @return
    */
   DynameicTaskJobEntity stop(DynameicTaskJobEntity dynameicTaskJob);
+
   /**
    * 开始任务
+   * 
    * @param dynameicTaskJob
    * @return
    */
   DynameicTaskJobEntity start(DynameicTaskJobEntity dynameicTaskJob);
+
   /**
    * 通过id查找任务
    * 
@@ -56,4 +62,13 @@ public interface DynamicTaskJobService {
    * @return
    */
   List<DynameicTaskJobEntity> findAll();
+
+  /**
+   * 分页查找
+   * 
+   * @param jobName
+   * @param page
+   * @return
+   */
+  Page<DynameicTaskJobEntity> findByConditions(String jobName, Pageable page);
 }

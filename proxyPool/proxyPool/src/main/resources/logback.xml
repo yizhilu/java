@@ -5,10 +5,13 @@
 		<resetJUL>true</resetJUL>
 	</contextListener>
 
-	<property name="log_pattern" value="%date{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} %mdc - %m%n" />
-	<property name="log_base_dir" value="./logs/%d{yyyyMMdd}" ></property>
+	<property name="log_pattern"
+		value="%date{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} %mdc - %m%n" />
+	<property name="log_base_dir" value="./logs/%d{yyyyMMdd}"></property>
+	<property name="log_error_dir" value="./logs/%d{yyyyMMdd}"></property>
 
-	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	<appender name="FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<append>true</append>
 		<encoder>
 			<pattern>${log_pattern}</pattern>
@@ -21,7 +24,22 @@
 			<fileNamePattern>${log_base_dir}/info.log</fileNamePattern>
 		</rollingPolicy>
 	</appender>
-
+	<appender name="ERROR"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>ACCEPT</onMatch>  
+            <onMismatch>DENY</onMismatch>
+		</filter>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${log_error_dir}/error.log</fileNamePattern>
+		</rollingPolicy>
+		<append>true</append>
+		<encoder>
+			<pattern>${log_pattern}</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+	</appender>
 	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
 		<target>System.out</target>
 		<encoder>
@@ -33,8 +51,10 @@
 		</filter>
 	</appender>
 
+
 	<root level="INFO">
 		<appender-ref ref="CONSOLE" />
 		<appender-ref ref="FILE" />
+		<appender-ref ref="ERROR" />
 	</root>
 </configuration>

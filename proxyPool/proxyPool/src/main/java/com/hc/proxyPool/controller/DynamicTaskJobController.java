@@ -5,6 +5,9 @@ import java.util.concurrent.ScheduledFuture;
 import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.concurrent.ConcurrentMapCache;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +21,7 @@ import com.hc.proxyPool.entity.DynameicTaskJobEntity;
 import com.hc.proxyPool.service.DynamicTaskJobService;
 
 @RestController
+@RequestMapping("dynamicTaskJob")
 public class DynamicTaskJobController extends BaseController {
   @Autowired
   private ThreadPoolTaskScheduler threadPoolTaskScheduler;
@@ -27,6 +31,21 @@ public class DynamicTaskJobController extends BaseController {
   private DynamicTaskJobService dynamicTaskJobService;
 
   /**
+   * 创建定时任务
+   * 
+   * @return
+   */
+  @RequestMapping(value = "/listPage", method = {RequestMethod.GET})
+  public ResponseModel listPage(String jobName, @PageableDefault Pageable page) {
+    try {
+      Page<DynameicTaskJobEntity> tasks = dynamicTaskJobService.findByConditions(jobName, page);
+      return this.buildHttpReslut(tasks);
+    } catch (Exception e) {
+      return this.buildHttpReslutForException(e);
+    }
+  }
+
+  /**  
    * 创建定时任务
    * 
    * @return
@@ -82,7 +101,7 @@ public class DynamicTaskJobController extends BaseController {
       DynameicTaskJobEntity dynameicTaskJob = dynamicTaskJobService.findById(dynameicTaskJobId);
       String jobName = dynameicTaskJob.getJobName();
 
-      ScheduledFuture<?> taskFuture =  cache.get(jobName,ScheduledFuture.class);
+      ScheduledFuture<?> taskFuture = cache.get(jobName, ScheduledFuture.class);
       if (taskFuture != null) {
         // 停止任务
         taskFuture.cancel(true);
@@ -108,7 +127,7 @@ public class DynamicTaskJobController extends BaseController {
       DynameicTaskJobEntity dynameicTaskJob = dynamicTaskJobService.findById(dynameicTaskJobId);
       String jobName = dynameicTaskJob.getJobName();
 
-      ScheduledFuture<?> taskFuture =  cache.get(jobName,ScheduledFuture.class);
+      ScheduledFuture<?> taskFuture = cache.get(jobName, ScheduledFuture.class);
 
       if (taskFuture != null) {
         // 停止任务
