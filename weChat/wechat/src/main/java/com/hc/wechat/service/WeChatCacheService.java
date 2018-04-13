@@ -3,6 +3,8 @@ package com.hc.wechat.service;
 import com.hc.wechat.entity.WeChatCacheEntity;
 
 /**
+ * 用于缓存微信全局应用的token 和 Ticket
+ * 
  * @author 作者 hc
  * @version 创建时间：2017年10月19日 下午5:41:01 类说明
  */

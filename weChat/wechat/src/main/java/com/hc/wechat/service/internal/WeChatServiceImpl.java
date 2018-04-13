@@ -174,6 +174,8 @@ public class WeChatServiceImpl implements WeChatService, MessageService {
   @Override
   @Transactional
   public String getTicket() {
+    // 1.如果是存储在redis 则先去redis 获取 如果有 且没有过期 直接返回，否则重新获取
+    // 2.如果是存储在数据库 则先去数据库 获取 如果有 且没有过期 直接返回，否则重新获取
     if ("redis".equals(CACHETOKENTYPE)) {
       ValueOperations<String, WeChatCacheEntity> ops =
           (ValueOperations<String, WeChatCacheEntity>) this.redisTemplate.opsForValue();
@@ -239,6 +241,8 @@ public class WeChatServiceImpl implements WeChatService, MessageService {
   @Override
   @Transactional
   public String getAccessToken(String appid, String secret) {
+    // 1.如果是存储在redis 则先去redis 获取 如果有 且没有过期 直接返回，否则重新获取
+    // 2.如果是存储在数据库 则先去数据库 获取 如果有 且没有过期 直接返回，否则重新获取
     if ("redis".equals(CACHETOKENTYPE)) {
       ValueOperations<String, WeChatCacheEntity> ops =
           (ValueOperations<String, WeChatCacheEntity>) this.redisTemplate.opsForValue();
@@ -306,10 +310,6 @@ public class WeChatServiceImpl implements WeChatService, MessageService {
   private ThirdPartUserEntity createWeChatAccount(Map<?, ?> weixinInfoMap) {
     ThirdPartUserEntity thirdPartUser = null;
     String nickName = (String) weixinInfoMap.get("nickname");
-    // 过滤昵称里的emoji表情
-    // nickName = EmojiFilterUtils.filterEmoji(nickName);
-    // nickName = EmojiFilterUtils.filterEmojiTwo(nickName);
-    // nickName = EmojiFilterUtils.filterEmojiThree(nickName);
     int sex = (Integer) weixinInfoMap.get("sex");
     String cover = (String) weixinInfoMap.get("headimgurl");
     String str_city = (String) weixinInfoMap.get("city");
@@ -339,10 +339,6 @@ public class WeChatServiceImpl implements WeChatService, MessageService {
   private void updateUserAndThirdPartUserInfo(ThirdPartUserEntity thirdPartUser,
       Map<?, ?> weixinInfoMap) {
     String nickName = (String) weixinInfoMap.get("nickname");
-    // 过滤昵称里的emoji表情
-    // nickName = EmojiFilterUtils.filterEmoji(nickName);
-    // nickName = EmojiFilterUtils.filterEmojiTwo(nickName);
-    // nickName = EmojiFilterUtils.filterEmojiThree(nickName);
     int sex = (Integer) weixinInfoMap.get("sex");
     String cover = (String) weixinInfoMap.get("headimgurl");
     String str_city = (String) weixinInfoMap.get("city");
@@ -373,12 +369,6 @@ public class WeChatServiceImpl implements WeChatService, MessageService {
     if (StringUtils.isBlank(currentUrl)) {
       return null;
     }
-
-    // 当前链接
-    // String currentUrl = request.getRequestURL() + "";
-    // if (StringUtils.isNotBlank(request.getQueryString())) {
-    // currentUrl += "?" + request.getQueryString();
-    // }
     // 获取js的签名相关信息
     Map<String, Object> result = null;
     // 获取ticket

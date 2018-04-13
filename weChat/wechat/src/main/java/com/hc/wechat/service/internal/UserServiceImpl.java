@@ -58,6 +58,11 @@ public class UserServiceImpl implements UserService {
     Validate.notBlank(user.getNickName(), "昵称不能为空");
     UserEntity oldUser = findById(user.getId());
     oldUser.setNickName(user.getNickName());
+    oldUser.setCity(user.getCity());
+    oldUser.setNickName(user.getNickName());
+    oldUser.setCover(user.getCover());
+    oldUser.setSex(user.getSex());
+    oldUser.setLastLoginDate(new Date());
     return userRepository.saveAndFlush(oldUser);
   }
 

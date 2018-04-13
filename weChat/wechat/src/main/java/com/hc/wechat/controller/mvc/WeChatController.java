@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hc.wechat.annotation.ObjectConvertAnno;
-import com.hc.wechat.common.enums.PlatFormType;
 import com.hc.wechat.common.utils.CookieUtils;
 import com.hc.wechat.common.utils.SHACoder;
 import com.hc.wechat.controller.BaseController;
@@ -321,6 +320,16 @@ public class WeChatController extends BaseController {
     return map;
   }
 
+  /**
+   * 提供本地测试（正式发布时去掉）
+   * 
+   * @param request
+   * @param response
+   * @param userId
+   * @param thirdPartUserId
+   * @param gotoUrl
+   * @return
+   */
   @ApiOperation(value = "本地测试  登陆User ThirdPartUser", notes = "本地测试  登陆User ThirdPartUser")
   @RequestMapping(value = "testlogin")
   public ModelAndView testlogin(HttpServletRequest request, HttpServletResponse response,
@@ -341,11 +350,19 @@ public class WeChatController extends BaseController {
     return new ModelAndView();
   }
 
+  /**
+   * 提供本地测试发送微信消息使用（正式发布时去掉）
+   * 
+   * @param request
+   * @param response
+   * @param openId
+   * @return
+   */
   @RequestMapping(value = "/testSend")
   @ResponseBody
   public String testSend(HttpServletRequest request, HttpServletResponse response, String openId) {
-    ThirdPartUserEntity thirdPartUser = thirdPartUserService.findByOpenIdAndPlatFormType(openId,
-        PlatFormType.PLAT_FORM_TYPE_WEIXIN);
+    // ThirdPartUserEntity thirdPartUser = thirdPartUserService.findByOpenIdAndPlatFormType(openId,
+    // PlatFormType.PLAT_FORM_TYPE_WEIXIN);
     // String content = "张三||18398601252||户籍办理||审核通过";
     // String wxTemplateId = "m9j458S65WpYPFlLA_vDhg9HExP6ALEV1Po447kJ4RA";
     // WxTemplate wxTemplate = new WxTransactNotice(null, thirdPartUser.getUser(), null, content,
@@ -364,12 +381,13 @@ public class WeChatController extends BaseController {
     return file;
   }
 
-  @RequestMapping(value = "/test")
-  @ResponseBody
-  public String test(HttpServletRequest request, HttpServletResponse response, String openId) {
-    return weChatService.getAccessToken(WECHAT_APPID, WECHAT_SECRET);
-  }
-
+  /**
+   * 微信js dk demo (正式发布时去掉)
+   * 
+   * @param request
+   * @param response
+   * @return
+   */
   @RequestMapping(value = "/weChatDemo")
   public ModelAndView share(HttpServletRequest request, HttpServletResponse response) {
     ModelAndView model = new ModelAndView();

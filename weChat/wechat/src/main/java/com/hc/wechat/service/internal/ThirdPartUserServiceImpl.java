@@ -76,16 +76,26 @@ public class ThirdPartUserServiceImpl implements ThirdPartUserService {
   @Transactional
   public void weChatModify(ThirdPartUserEntity thirdPartUser) {
     Validate.notNull(thirdPartUser, "更新第三方用户信息时 ，第三方用户信息不能为空");
+    Validate.notBlank(thirdPartUser.getId(), "更新第三方用户信息时 ，id 不能为空");
+    ThirdPartUserEntity old = thirdPartUserRepository.findOne(thirdPartUser.getId());
     String openId = thirdPartUser.getOpenId();
     Validate.notBlank(openId, "更新第三方用户信息时 ，openId 不能为空");
+    old.setOpenId(openId);
     String nickName = thirdPartUser.getNickName();
     Validate.notBlank(nickName, "创建第三方用户时 ，nickName 不能为空");
+    old.setNickName(nickName);
     // 因为存在 扫码绑定，扫码通知进入的用户 这类的用户可能没有关注公众号 没有unionid 所以 不能要求 unionid不能为空
     // String unionId = thirdPartUser.getUnionId();
     // Validate.notBlank(unionId, "更新第三方用户信息时，unionId 不能为空");
     PlatFormType platFormType = thirdPartUser.getPlatFormType();
     Validate.notNull(platFormType, "更新第三方用户信息时 ，第三方用户平台信息不能为空");
-    thirdPartUserRepository.saveAndFlush(thirdPartUser);
+    old.setPlatFormType(platFormType);
+    old.setSex(thirdPartUser.getSex());
+    old.setCover(thirdPartUser.getCover());
+    old.setCity(thirdPartUser.getCity());
+    old.setLastLoginDate(thirdPartUser.getLastLoginDate());
+    old.setUnionId(thirdPartUser.getUnionId());
+    thirdPartUserRepository.saveAndFlush(old);
   }
 
   @Override
