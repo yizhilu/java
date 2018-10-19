@@ -1,0 +1,40 @@
+<style>
+.upload-drag {
+	position: relative;
+	padding: 30px;
+	border: 1px dashed #e2e2e2;
+	background-color: #fff;
+	text-align: center;
+	cursor: pointer;
+	color: #999;
+}
+
+.upload-drag .fa {
+	font-size: 50px;
+	color: #009688;
+}
+
+.upload-drag .keyword-file-input {
+	position: absolute;
+	left: 0;
+	top: 0;
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	cursor: pointer;
+}
+</style>
+<div class="upload-drag">
+	<i class="fa fa-cloud-upload"></i>
+	<p>点击上传，或将文件拖拽到此处(支持xlsx格式)</p>
+	<input type="file" ngf-pattern="'.xlsx,.xls'" ngf-multiple="true"
+		ngf-max-size="1MB" ngf-accept="'.xlsx,.xls'"
+		ngf-select="uploadFile($files,$invalidFiles)"
+		class="keyword-file-input">
+	<div class="progress">
+		<div class="progress-bar" role="progressbar"
+			ng-style="{ 'width': file.progress + '%' }" style="width: 100%;"
+			ng-repeat="file in files"></div>
+	</div>
+</div>

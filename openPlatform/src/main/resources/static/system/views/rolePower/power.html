@@ -1,0 +1,103 @@
+<div class="content_box" ng-scrollbars>
+	<h1 class="page_tit">权限管理</h1>
+	<!-- 最多允许5个搜索项 -->
+	<div class="operate_area container-fluid">
+
+		<div class="row clearfix">
+			<form>
+				<div class="col-sm-4 col-md-3 col-lg-2 input_container clearfix">
+					<label class="input_description fl">权限名称:</label>
+					<div class="input_box">
+						<input type="text" ng-model="searchInfo.comment">
+					</div>
+				</div>
+				<div class="col-sm-4 col-md-3 col-lg-2 input_container clearfix">
+					<label class="input_description fl">权限串:</label>
+					<div class="input_box">
+						<input type="text" ng-model="searchInfo.resource">
+					</div>
+				</div>
+				<div class="col-sm-4 col-md-3 col-lg-2 input_container clearfix">
+					<label class="input_description fl">状态:</label>
+					<div class="input_box">
+						<select ng-model="searchInfo.status">
+							<option value="">请选择状态</option>
+							<option value="STATUS_NORMAL">正常</option>
+							<option value="STATUS_DISABLE">禁用</option>
+						</select>
+					</div>
+				</div>
+				<button type="button " class="me-btn fl btn-primary"
+					ng-click="gatDataLists('0')"
+					has-permission="/v1/competence/getByCondition&GET">
+					<i class="iconfont icon-sousuo"></i>搜索
+				</button>
+				<button type="button" class="me-btn fl reset_btn"
+					ng-click="resetSearchInfo()">重置</button>
+				<a class="me-btn fr btn-success" ui-sref="me.addPower"><i
+					class="iconfont icon-weibiaoti37"
+					has-permission="/v1/competence&POST"></i>新增</a>
+			</form>
+		</div>
+
+	</div>
+
+	<div class="contents">
+		<table class="table my_table">
+			<thead>
+				<tr>
+					<th width="28px"></th>
+					<th width="75px">ID</th>
+					<th width="40%">权限名称</th>
+					<th>请求方式</th>
+					<th>权限串</th>
+					<th>状态</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="item in dataLists">
+					<td width="28px"></td>
+					<td width="75px">{{item.id | limitTo:6}}</td>
+					<td>{{item.comment}}</td>
+					<td>{{item.methods}}</td>
+					<td>{{item.resource}}</td>
+					<td>{{item.status=="STATUS_NORMAL"?"正常":"禁用"}}</td>
+					<td><a class="op_item btn-link"
+						ui-sref="me.editPower({id:item.id})" ng-if="permission_modify">修改</a>
+						<!--<a class="op_item" ui-sref="me.editPower({id:item.id})">修改</a>-->
+						<a class="op_item btn-link"
+						ng-click="hasDisable(item, item.status=='STATUS_NORMAL')"
+						ng-if="permission_disableOrUndisable">{{item.status=="STATUS_NORMAL"?"禁用":"启用"}}</a>
+					</td>
+				</tr>
+
+			</tbody>
+			<tfoot>
+				<tr>
+					<td>
+						<!--<input type="checkbox">-->
+					</td>
+					<td colspan="5">
+						<!-- 批量操作 -->
+						<div class="batch_operate_area clearfix fl"></div>
+						<nav class="fr pagination_box">
+							<p class="pagination_total fl">共 {{pageParams.totalItems}}
+								条数据，每页 {{pageParams.itemsPerPage}} 条，共 {{pageParams.totalPages}}
+								页</p>
+							<ul ng-if="pageParams.totalItems" uib-pagination
+								boundary-links="true" total-items="pageParams.totalItems"
+								ng-model="pageParams.currentPage" class="pagination-sm"
+								items-per-page="pageParams.itemsPerPage"
+								max-size="pageParams.maxSize" previous-text="&lsaquo;"
+								next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
+								ng-change="gatDataLists()"></ul>
+						</nav>
+					</td>
+					<td></td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+
+</div>

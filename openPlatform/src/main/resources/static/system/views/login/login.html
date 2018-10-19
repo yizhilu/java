@@ -1,0 +1,128 @@
+<style>
+.login_box {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background: url(/system/images/bg.jpg);
+	background-size: cover;
+}
+
+.login_con_box {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 380px;
+	height: 300px;
+	background-color: #fff;
+	border: 1px solid #dedede;
+	border-radius: 10px;
+	margin: auto;
+}
+
+.login_con_box .input_description {
+	width: 60px;
+}
+
+.login_err {
+	height: 16px;
+	line-height: 16px;
+	font-size: 12px;
+	padding-left: 80px;
+	margin-bottom: 15px;
+}
+
+.login_err span {
+	float: left;
+	color: #ff3500;
+}
+
+.login_con_box .has-error input {
+	border-color: #ff3500;
+}
+
+.login_con_box .has-error label {
+	color: #ff3500;
+}
+
+.btn_box_login {
+	margin: 20px 0 15px 68px;
+	text-align: center;
+}
+
+.me-btn_r {
+	border: 1px solid #2cb2a8;
+	background-color: #fff;
+	color: #2cb2a8;
+	border-radius: 0;
+	height: 32px;
+	padding: 0 15px;
+	margin: 8px;
+	line-height: 32px;
+	outline: none;
+	display: inline-block;
+	border-radius: 4px;
+}
+
+.me-btn_l {
+	border: 1px solid #2cb2a8;
+	background-color: #2cb2a8;
+	color: #FFF;
+	border-radius: 0;
+	height: 32px;
+	padding: 0 50px;
+	margin: 8px;
+	line-height: 32px;
+	outline: none;
+	display: inline-block;
+	border-radius: 4px; 
+}
+</style>
+
+<div class="content_box">
+	<!--<h1><a ui-sref="me.home">login</a></h1>-->
+
+	<div class="login_box">
+		<div class="login_con_box" style="width: 450px; height: 320px;">
+			<form name="loginForm" style="overflow: hidden; margin: 50px;">
+				<div class="input_container"
+					ng-class="{'has-error':loginForm.un.$touched&&loginForm.un.$invalid}">
+					<label class="input_description fl">用户名:</label>
+					<div class="input_box">
+						<!-- <input type="text" ng-init="UI.un='admin'" ng-model="UI.un" -->
+						<input type="text" ng-model="UI.un"
+							name="un" required>
+					</div>
+				</div>
+				<p class="login_err">
+					<span ng-show="loginForm.un.$touched&&loginForm.un.$error.required">用户名不能为空！</span>
+				</p>
+
+				<div class="input_container"
+					ng-class="{'has-error':loginForm.up.$touched&&loginForm.up.$invalid}">
+					<label class="input_description fl">密 码:</label>
+					<div class="input_box">
+						<!-- <input type="password" ng-init="UI.up=123456" ng-model="UI.up" -->
+						<input type="password" ng-model="UI.up"
+							name="up" required>
+					</div>
+				</div>
+				<p class="login_err">
+					<span ng-show="loginForm.up.$touched&&loginForm.up.$error.required">密码不能为空！</span>
+				</p>
+				<div class="btn_box_login clearfix">
+					<!-- <a class="me-btn_r fr" ui-sref="register" name="register">机构用户注册</a> -->
+					<!--<a class="me-btn fl" ui-sref="xxxx">机构用户注册</a>-->
+					<button class="me-btn_l fl" ng-click="login(UI)" name="login">登录</button>
+				</div>
+				<p class="login_err">
+					<span>{{loginError}}</span>
+				</p>
+			</form>
+		</div>
+	</div>
+
+</div>

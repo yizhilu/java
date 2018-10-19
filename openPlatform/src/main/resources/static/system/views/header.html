@@ -1,0 +1,16 @@
+<style>
+.user_info .cursor-pointer {
+	cursor: pointer;
+}
+</style>
+<div class="header_box" ng-controller="navCtrl">
+	<a ui-sref="me.home" class="logo_box fl"> <img
+		src="images/app-icon.png" alt=""> <span>达州市公安局学法积分综合管理平台</span>
+	</a>
+	<div class="fr user_info">
+		<span class="user_name fl cursor-pointer" ng-click="editPsw()"
+			ng-if="permission_updatePassword"><font color="#e1f10e">修改密码</font></span> <span
+			class="user_name fl"><font color="#e1f10e">{{uid}}</font></span> <a ng-click="loginOut()"
+			class="sign_out fl cursor-pointer" ><font color="#e1f10e">退出</font></a>
+	</div>
+</div>

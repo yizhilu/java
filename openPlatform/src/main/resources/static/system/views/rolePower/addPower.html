@@ -1,0 +1,63 @@
+<div class="content_box" ng-scrollbars>
+	<h1 class="page_tit">
+		<a class="page_nav" href="javascript:void(0)" ng-click="returnPage()">权限管理</a>
+		<i class="iconfont icon-jiantou1"></i>
+		<span class="page_current_name">新增权限功能</span>
+		<a class="return_page fr" ng-click="returnPage()">
+			<i class="iconfont icon-fanhui"></i>返回</a>
+	</h1>
+
+
+	<form class="form-horizontal" name="competenceEntityForm">
+
+		<div class="form-group" ng-class="{'has-error':competenceEntityForm.comment.$touched&&competenceEntityForm.comment.$invalid}">
+			<label class="col-sm-1 control-label nowrap">权限名称:</label>
+			<div class="col-sm-5">
+				<input type="text" class="form-control" required name="comment" minlength="2" maxlength="20" ng-model="competenceEntity.comment" placeholder="请输入权限名称">
+			</div>
+			<div class="col-sm-4">
+				<p class="form_error_info" ng-show="competenceEntityForm.comment.$touched&&competenceEntityForm.comment.$error.required">
+					权限名称不能为空！</p>
+				<p class="form_error_info" ng-show="competenceEntityForm.name.$touched&&(competenceEntityForm.name.$error.minlength||competenceEntityForm.name.$error.maxlength)">
+					权限名称长度必须为2-20个字符！</p>
+			</div>
+		</div>
+
+		<div class="form-group" ng-class="{'has-error':competenceEntityForm.resource.$touched&&competenceEntityForm.resource.$invalid}">
+			<label class="col-sm-1 control-label nowrap">权限串:</label>
+			<div class="col-sm-5">
+				<input type="text" class="form-control" required name="resource" ng-model="competenceEntity.resource" placeholder="请输入权限串">
+			</div>
+			<div class="col-sm-4">
+				<p class="form_error_info" ng-show="competenceEntityForm.resource.$touched&&competenceEntityForm.resource.$error.required">
+					权限串不能为空！</p>
+			</div>
+		</div>
+
+		<div class="form-group" ng-class="{'has-error':competenceEntityForm.methods.$touched&&competenceEntityForm.methods.$invalid}">
+			<label class="col-sm-1 control-label nowrap">请求方式:</label>
+			<div class="col-sm-5">
+				<select name="methods" class="form-control" required ng-model="competenceEntity.methods">
+					<option value="">请选择请求方式</option>
+					<option value="get" selected="selected">GET</option>
+					<option value="post">POST</option>
+					<option value="patch">PATCH</option>
+					<option value="delete">DELETE</option>
+				</select>
+			</div>
+			<div class="col-sm-4">
+				<p class="form_error_info" ng-show="competenceEntityForm.methods.$touched&&competenceEntityForm.methods.$error.required">
+					请求方式不能为空！</p>
+			</div>
+		</div>
+
+	</form>
+
+	<div class="btn_box col-sm-5">
+		<button class="me-btn" ng-click='registerCompetence()' has-permission="/v1/competence&POST" ng-disabled="!competenceEntityForm.$valid"
+		 ng-class="{disBtn:!competenceEntityForm.$valid}">保存
+		</button>
+		<button class="me-btn" ng-click="returnPage()">取消</button>
+	</div>
+
+</div>

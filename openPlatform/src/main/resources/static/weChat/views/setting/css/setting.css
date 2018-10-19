@@ -1,0 +1,131 @@
+.appleswitch {
+	float: right;
+	line-height: 44px;
+	font-size: 18px;
+	color: #ffffff;
+	box-sizing: border-box;
+	padding-right: 16px;
+	
+	background-size: auto 100%;
+	line-height: 44px;
+	font-size: 18px;
+	color: #ffffff;
+}
+.swiper-container3 {
+	border-left: 1px solid #eee;
+	border-right: 1px solid #eee;
+	position: relative;
+	left: 0;
+	margin-top: 9px;
+	background-color: #ffffff;
+}
+
+.swiper-container3 .swiper-slide {
+	font-size: 17px;
+	line-height: 10px;
+	text-align: center;
+	color: #d0d0d0;
+}
+
+.swiper-container3 .swiper-slide-active {
+	-webkit-filter: brightness(1);
+    line-height: 10px;
+	text-align: center;
+	color: #31312D;
+	font-size: 20px;
+	filter: brightness(1);
+}
+
+.swiper-container3 .swiper-slide-prev {
+	-webkit-filter: brightness(1);
+	line-height: 10px;
+	text-align: center;
+	color: #999;
+	font-size: 20px;
+	filter: brightness(1);
+}
+
+.swiper-container3 .swiper-slide-next {
+	-webkit-filter: brightness(1);
+	line-height: 10px;
+	text-align: center;
+	color: #999;
+	font-size: 20px;
+	filter: brightness(1);
+}
+
+.swiper-container3 .cloth {
+	position: absolute;
+	width: 0px;
+	height: 28px;
+	left: 0px;
+	top: 58px;
+	border-top: 1px solid #070708;
+	border-bottom: 1px solid #070708;
+}
+
+
+
+
+.swiper-container5 {
+	border-left: 1px solid #eee;
+	border-right: 1px solid #eee;
+	position: relative;
+	left: 20;
+	margin-top: 9px;
+	background-color: #ffffff;
+}
+
+.swiper-container5 .swiper-slide {
+	font-size: 17px;
+	line-height: 10px;
+	text-align: center;
+	color: #d0d0d0;
+}
+
+.swiper-container5 .swiper-slide-active {
+	-webkit-filter: brightness(1);
+    line-height: 10px;
+	text-align: center;
+	color: #31312D;
+	font-size: 20px;
+	filter: brightness(1);
+}
+
+.swiper-container5 .swiper-slide-prev {
+	-webkit-filter: brightness(1);
+	line-height: 10px;
+	text-align: center;
+	color: #999;
+	font-size: 20px;
+	filter: brightness(1);
+}
+
+.swiper-container5 .swiper-slide-next {
+	-webkit-filter: brightness(1);
+	line-height: 10px;
+	text-align: center;
+	color: #999;
+	font-size: 20px;
+	filter: brightness(1);
+}
+
+.swiper-container5 .cloth {
+	position: absolute;
+	width: 0px;
+	height: 28px;
+	left: 0px;
+	top: 58px;
+	border-top: 1px solid #070708;
+	border-bottom: 1px solid #070708;
+}
+
+
+
+
+
+
+
+
+
+

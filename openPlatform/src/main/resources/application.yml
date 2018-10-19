@@ -1,0 +1,99 @@
+server:
+  port: 6770
+spring:
+  jpa:
+    show-sql: true
+    generate-ddl: false
+    database: MYSQL
+    hibernate:
+      ddl-auto: update
+  freemarker:
+    request-context-attribute: request
+    allow-request-override: false
+    template-loader-path: classpath:/static
+    cache: false
+    charset: UTF-8
+    expose-request-attributes: true
+    expose-session-attributes: true
+    suffix: .ftl
+swagger:
+  version: v0.0.9
+sms:
+  validCodePrefix: 车上码
+ali:
+  verificationCodeTemp: T170317001491
+  aliAppcode: 8afa82def0bd4b9a9b19557972d1a301
+author:
+  ignoreUrls: /favicon.ico,/,/home,/error,/v2/api-docs,/v1/security/loginFail,/v1/security/loginSuccess,/login,/swagger/**,/system/**,/module/**,/weChat/**,/wx/**,/v1/competence/findCompetencePermissionByUrl
+  ignoreMethodCheckRoles: ADMIN
+roles:
+    deleteDeny: ADMIN
+#hystrix调用方法的超时时间，默认是1000毫秒
+hystrix:
+  command: 
+    default: 
+      execution: 
+        isolation: 
+          thread: 
+            timeoutInMilliseconds: 20000
+---
+########################## test
+server:
+  port: 7130
+spring:
+  profiles: test
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://114.55.54.96:33606/wechat_open_platform?characterEncoding=UTF-8
+    username:  96test
+    password:  Password@123456
+    driverClassName: com.mysql.jdbc.Driver
+        #redis
+  redis:
+    host: r-bp1cf9fe2bd897b4.redis.rds.aliyuncs.com
+    port: 6379
+    password: rdSmCuubO4GZ
+    pool:
+      max-active: 20
+      max-wait: 1
+      max-idle: 10
+      min-idle: 1
+    database: 20
+#  mqtt:
+#    url: tcp://114.55.54.96:61613
+#    username: admin
+#    password: password
+#    customer:
+#      clientId: customer
+#      topics:  SERVER/+/electricity,SERVER/+/humanbody,SERVER/+/switch,SERVER/+/status
+#      completionTimeout: 50000
+#      qos: 1
+#    proudcer:
+#      clientId: proudcer
+#      defaultTopic: test    
+author:
+  ignoreUrls: /favicon.ico,/,/home,/error,/v2/api-docs,/v1/security/loginFail,/v1/security/loginSuccess,/login,/swagger/**,/system/**,/module/**,/wx/**,/weChat/**,/v1/competence/findCompetencePermissionByUrl
+  ignoreMethodCheckRoles: ADMIN
+#微信配置
+weChat:
+  appId: wxa0441a82cbe2d6e5
+  secret: 51ebe44215789451e0b43ef4a798d81a
+  #服务域名
+  oAuthCallbackDomain: aih.91-ec.com
+  appToke: vdnhbeer
+  #缓存微信全局token 和Ticket的方式
+  cacheTokenType: mysql
+  #邮件里的MCHID
+  mch_id: 1487250992
+  #在微信商户平台pay.weixin.com里自己生成的那个key
+  partner_key: 111111111111111
+  #支付完成后微信发给该链接信息，可以判断会员是否支付成功，改变订单状态等。
+  notify_url: http://nh.91-ec.com/wx/rtcode
+  bind_telephone_template:  MXIN_gLJOdZzWKb9Ag0eMKOJ7saj3QUcOr4spZLG-oE
+  bind_updatePhone_template: DB2CpIEUI6KGe0Bm_jqr29_HhM5vsZq1kag9vK5Pxlw
+  system_template: QEarEpkstoDt5Xz_jMh3NOqq4v7cmoipcuStp3EKaEM
+  unbind_gateway_template: EMyLL5Jtr1YW9S4tiOICATy0crZRLNqgtFDUhlf99x4
+  unbind_socket_template: np6gxsZNLI8jGumLcfA4o9wLzxAdojYoKOa1-yab9RU
+  bind_gateway_template: eswrHrvRlpBvfBGq2uEEn0zY0EXFTk7cKIiEpxesIcI
+  electric_statistics: 0iRA0US1TUj1FqUewk4VgAgG_yF-FIDYeDnJGEdnABs
+appDns: http://aih.91-ec.com

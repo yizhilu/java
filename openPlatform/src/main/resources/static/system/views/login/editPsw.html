@@ -1,0 +1,42 @@
+<div class="me_modal_box">
+	<div class="me_modal_header"><h1 class="me_modal_tit">修改密码</h1></div>
+	<div class="me_modal_body">
+		<form class="form-horizontal" name="editPswForm">
+			
+			<div class="form-group"
+				 ng-class="{'has-error':editPswForm.oldPassword.$touched&&editPswForm.oldPassword.$invalid}">
+				<label class="col-sm-1 control-label nowrap">旧密码:</label>
+				<div class="col-sm-5">
+					<input type="password" class="form-control" required name="oldPassword"
+						   ng-model="info.oldPassword" placeholder="请输入旧密码">
+				</div>
+				<div class="col-sm-4">
+					<p class="form_error_info"
+					   ng-show="editPswForm.oldPassword.$touched&&editPswForm.oldPassword.$error.required">
+						旧密码不能为空！</p>
+				</div>
+			</div>
+			
+			<div class="form-group"
+				 ng-class="{'has-error':editPswForm.newPassword.$touched&&editPswForm.newPassword.$invalid}">
+				<label class="col-sm-1 control-label nowrap">新密码:</label>
+				<div class="col-sm-5">
+					<input type="password" class="form-control" required name="newPassword"
+						   ng-model="info.newPassword" placeholder="请输入新密码">
+				</div>
+				<div class="col-sm-4">
+					<p class="form_error_info"
+					   ng-show="editPswForm.newPassword.$touched&&editPswForm.newPassword.$error.required">
+						新密码不能为空！</p>
+				</div>
+			</div>
+		</form>
+		
+		<div class="btn_box">
+			<button class="me-btn" ng-click='savePsw()' ng-disabled="!editPswForm.$valid"
+					ng-class="{disBtn:!editPswForm.$valid}">保存
+			</button>
+			<button class="me-btn" ng-click="reset()">取消</button>
+		</div>
+	</div>
+</div>

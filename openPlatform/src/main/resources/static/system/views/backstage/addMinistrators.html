@@ -1,0 +1,76 @@
+<div class="content_box" ng-scrollbars>
+	<h1 class="page_tit">
+		<a class="page_nav" href="javascript:void(0)" ng-click="returnPage()">用户管理</a>
+		<i class="iconfont icon-jiantou1"></i> <span class="page_current_name">新增用户</span>
+		<a class="return_page fr" ng-click="returnPage()"> <i
+			class="iconfont icon-fanhui"></i>返回
+		</a>
+	</h1>
+
+
+	<form class="form-horizontal" name="addMinistrators">
+		<div class="form-group"
+			ng-class="{'has-error':addMinistrators.userName.$touched&&addMinistrators.userName.$invalid}">
+			<label class="col-sm-1 control-label nowrap">姓名:</label>
+			<div class="col-sm-5">
+				<input type="text" class="form-control" required name="userName"
+					minlength="1" maxlength="12"
+					ng-pattern="/^[\u4e00-\u9fa5a-zA-Z0-9]+$/"
+					ng-model="ministrators.name" placeholder="请输入姓名">
+			</div>
+			<div class="col-sm-4">
+				<p class="form_error_info"
+					ng-show="addMinistrators.userName.$touched&&addMinistrators.userName.$error.required">
+					姓名不能为空！</p>
+				<p class="form_error_info"
+					ng-show="addMinistrators.userName.$touched&&(addMinistrators.userName.$error.minlength||addMinistrators.userName.$error.maxlength||addMinistrators.userName.$error.pattern)">
+					姓名长度必须为1-12个字符，大小写中英文字符或数字！</p>
+			</div>
+		</div>
+		<div class="form-group"
+			ng-class="{'has-error':addMinistrators.account.$touched&&addMinistrators.account.$invalid}">
+			<label class="col-sm-1 control-label nowrap">账号:</label>
+			<div class="col-sm-5">
+				<input type="text" class="form-control" required name="account"
+					minlength="4" maxlength="20" ng-pattern="/^[a-zA-Z0-9]+$/"
+					ng-model="ministrators.account" placeholder="请输入账号">
+			</div>
+			<div class="col-sm-4">
+				<p class="form_error_info"
+					ng-show="addMinistrators.account.$touched&&addMinistrators.account.$error.required">
+					账号不能为空！</p>
+				<p class="form_error_info"
+					ng-show="addMinistrators.account.$touched&&(addMinistrators.account.$error.minlength||addMinistrators.account.$error.maxlength||addMinistrators.account.$error.pattern)">
+					账号账号长度必须为4-20个字符，大小写英文字符或数字！</p>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-sm-1 control-label nowrap">角色:</label>
+			<div class="col-sm-5">
+				<dl class="permission-list">
+					<dd>
+						<dl class="cl permission-list2">
+							<dd>
+								<label class="m-tb-10 mr10 text-over" ng-repeat="role in roles"
+									style="display: block"> <input type="checkbox"
+									ng-model="role.isChecked">{{role.name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{role.comment}}
+								</label>
+							</dd>
+						</dl>
+					</dd>
+				</dl>
+			</div>
+		</div>
+
+	</form>
+
+	<div class="btn_box col-sm-5">
+		<button class="me-btn" ng-click='create()'
+			ng-disabled="!addMinistrators.$valid"
+			ng-class="{disBtn:!addMinistrators.$valid}"
+			has-permission="/v1/operator/&POST">保存</button>
+		<button class="me-btn" ng-click="returnPage()">取消</button>
+	</div>
+
+</div>

@@ -1,0 +1,110 @@
+<div class="content_box" ng-scrollbars>
+	<h1 class="page_tit">订单管理</h1>
+	<!-- 最多允许5个搜索项 -->
+	<div class="operate_area container-fluid">
+		<div class="row clearfix">
+			<div class="col-sm-4 col-md-3 col-lg-2 input_container clearfix">
+				<label class="input_description fl">订单编号:</label>
+				<div class="input_box"><input type="text"></div>
+			</div>
+			<!--<div class="col-sm-4 col-md-3 col-lg-2 input_container clearfix">
+				<label class="input_description fl">审核状态:</label>
+				<div class="input_box">
+					<select>
+						<option>aaa</option>
+						<option>aaa</option>
+						<option>aaa</option>
+						<option>aaa</option>
+					</select>
+				</div>
+			</div>-->
+			<div class="col-sm-4 col-md-3 col-lg-2 input_container clearfix select_time">
+				<label class="input_description fl">创建日期:</label>
+				<div class="input_box clearfix se_time">
+					<input type="text" readonly alt-input-formats="yyyy-MM-dd" uib-datepicker-popup="yyyy-MM-dd" ng-model="DateDayStart" show-button-bar="true" datepicker-options="" is-open="d.es" ng-click="d.es=!d.es">
+					<span class="fl time_se"> - </span>
+					<input type="text" readonly alt-input-formats="yyyy-MM-dd" uib-datepicker-popup="yyyy-MM-dd" ng-model="DateDayEnd" show-button-bar="false" datepicker-options="{minDate:DateDayStart}" is-open="d.e" ng-click="d.e=!d.e">
+				</div>
+			</div>
+			<button class="me-btn fl"><i class="fa fa-search"></i>搜索</button>
+		</div>
+	</div>
+	
+	<div class="contents">
+		<table class="table my_table">
+			<thead>
+			<tr>
+				<th width="28px"></th>
+				<th width="75px">ID</th>
+				<th>订单编号</th>
+				<th width="160px">创建时间</th>
+				<th>支付状态</th>
+				<th>结算状态</th>
+				<th width="160px">结算日期</th>
+				<th>操作</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td><input type="checkbox"></td>
+				<td>888888</td>
+				<td>4656456567567</td>
+				<td>2016-09-08 18:12:00</td>
+				<td>已支付</td>
+				<td>未结算</td>
+				<td>---</td>
+				<td>
+					<a class="op_item" ui-sref="me.orderDetail">详情</a>
+				</td>
+			</tr>
+			
+			
+			<tr>
+				<td><input type="checkbox"></td>
+				<td>888888</td>
+				<td>4656456567567</td>
+				<td>2016-09-08 18:12:00</td>
+				<td>已支付</td>
+				<td>未结算</td>
+				<td>---</td>
+				<td>
+					<a class="op_item" ui-sref="me.orderDetail">详情</a>
+				</td>
+			</tr>
+			
+			
+			<tr>
+				<td><input type="checkbox"></td>
+				<td>888888</td>
+				<td>4656456567567</td>
+				<td>2016-09-08 18:12:00</td>
+				<td>已支付</td>
+				<td>未结算</td>
+				<td>---</td>
+				<td>
+					<a class="op_item" ui-sref="me.orderDetail">详情</a>
+				</td>
+			</tr>
+			
+			
+			
+			</tbody>
+			<tfoot>
+			<tr>
+				<td><!--<input type="checkbox">--></td>
+				<td colspan="9">
+					<!-- 批量操作 -->
+					<div class="batch_operate_area clearfix fl">
+					</div>
+					<nav class="fr pagination_box">
+						<p class="pagination_total fl">共 89 条数据，每页 15 条，共 6 页</p>
+						<ul uib-pagination boundary-links="true" total-items="totalItems" ng-model="currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+					</nav>
+				</td>
+				<td></td>
+			</tr>
+			</tfoot>
+		</table>
+	</div>
+
+</div>

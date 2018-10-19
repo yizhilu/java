@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ueditor图片对话框</title>
+<script type="text/javascript" src="../internal.js"></script>
+
+<!-- jquery -->
+<script type="text/javascript"
+	src="../../third-party/jquery-1.10.2.min.js"></script>
+
+<!-- webuploader -->
+<script src="../../third-party/webuploader/webuploader.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="../../third-party/webuploader/webuploader.css">
+
+<!-- image dialog -->
+<link rel="stylesheet" href="image.css" type="text/css" />
+<style type="text/css">
+.wrapper {
+	width: 600px;
+	padding: 10px;
+	height: 352px;
+	overflow: hidden;
+	position: relative;
+	border-bottom: 1px solid #d7d7d7
+}
+
+#localPath{
+	float: left;
+	width: 350px;
+	line-height: 20px;
+	height: 20px;
+}
+
+#clipboard {
+	float: left;
+	width: 70px;
+	height: 30px;
+}
+
+.description {
+	color: #0066cc;
+	margin-top: 2px;
+	width: 450px;
+	height: 45px;
+	float: left;
+	line-height: 22px
+}
+
+#upload {
+	width: 100px;
+	height: 30px;
+	float: right;
+	margin: 10px 2px 0 0;
+	cursor: pointer;
+}
+
+#msg {
+	width: 140px;
+	height: 30px;
+	line-height: 25px;
+	float: left;
+	color: red
+}
+.description {
+    color: #0066cc;
+    margin-top: 2px;
+    width: 450px;
+    height: 45px;
+    float: left;
+    line-height: 22px;
+    position: absolute;
+    top: 320px;
+    left: 80px;
+}
+</style>
+</head>
+<body>
+
+	<div class="wrapper">
+		<div id="tabhead" class="tabhead">
+			<input id="localPath" type="text" readonly />
+			<div id="clipboard"></div>
+			<div id="msg"></div>
+		</div>
+		<div id="tabbody" class="tabbody">
+			<!-- 上传图片 -->
+			<div id="upload" class="panel focus">
+				<div id="queueList" class="queueList">
+					<div class="statusBar element-invisible">
+						<div class="progress">
+							<span class="text">0%</span> <span class="percentage"></span>
+						</div>
+						<div class="info"></div>
+						<div class="btns">
+							<div id="filePickerBtn"></div>
+							<div class="uploadBtn">
+								<var id="lang_start_upload"></var>
+							</div>
+						</div>
+					</div>
+					<div id="dndArea" class="placeholder">
+						<div class="filePickerContainer">
+							<div id="filePickerReady"></div>
+						</div>
+					</div>
+					<ul class="filelist element-invisible">
+						<li id="filePickerBlock" class="filePickerBlock"></li>
+					</ul>
+				</div>
+			</div>
+
+		</div>
+		<div>
+            <div class="description">
+                <span style="color: red"><var id="lang_resave"></var>: </span><var id="lang_step"></var>
+            </div>
+        </div>
+	</div>
+	<script type="text/javascript" src="tangram.js"></script>
+	<script type="text/javascript" src="wordimage.js"></script>
+	<script type="text/javascript">
+		wordImage.initFile();
+	</script>
+</body>
+</html>

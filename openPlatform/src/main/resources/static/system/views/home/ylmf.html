@@ -1,0 +1,119 @@
+<div class="form-group"
+	 ng-class="{'has-error':registerInfoForm.idNumber.$touched&&registerInfoForm.idNumber.$invalid}">
+	<label class="col-sm-2 control-label nowrap">证件号码:</label>
+	<div class="col-sm-5">
+		<input type="text" class="form-control" required name="idNumber"
+			   ng-model="registerInfo.idNumber" placeholder="请输入证件号码">
+	</div>
+	<div class="col-sm-4">
+		<p class="form_error_info"
+		   ng-show="registerInfoForm.idNumber.$touched&&registerInfoForm.idNumber.$error.required">
+			证件号码不能为空！</p>
+	</div>
+</div>
+
+<div class="form-group"
+	 ng-class="{'has-error':registerInfoForm.documentBackPhoto.$touched&&registerInfoForm.documentBackPhoto.$invalid}">
+	<label class="col-sm-2 control-label nowrap">证件正面照片:</label>
+	<div class="col-sm-5">
+		<!--<input type="text" class="form-control" required name="documentBackPhoto"
+			   ng-model="registerInfo.documentBackPhoto" placeholder="请输入证件正面照片">-->
+		
+		<!--<div class="upload_img" ngf-pattern="'.bmp,.jpg,.gif,.png'" ngf-max-size="5120KB" ngf-accept="'.bmp,.jpg,.gif,.png'" ngf-select="img_upload($file)">
+			<img uib-tooltip="上传封面" tooltip-placement="right" class="upload_img" ngf-resize="{width: 750, height: 600, quality: 0.9}" ngf-thumbnail="imgPath==''?'/lib/images/pic_add.png':imgPath" src="" style="cursor:pointer">
+		</div>-->
+		
+		<div class="img_in" ngf-pattern="'.bmp,.jpg,.gif,.png'" ngf-max-size="5120KB"
+			 ngf-accept="'.bmp,.jpg,.gif,.png'" ngf-select="img_upload($file,'documentBackPhoto')">
+			<img class="upload_img" tooltip-placement="right" ngf-thumbnail="imgPath.documentBackPhoto"
+				 alt="">
+			<!--<input class="input-head" ng-change="uploadImg('documentBackPhoto')" id="documentBackPhoto" required name="documentBackPhoto" type="file" ng-model="registerInfo.documentBackPhoto">-->
+		</div>
+		<input type="hidden" ng-model="registerInfo.documentBackPhoto" required name="documentBackPhoto">
+		<p class="update_note">格式：jpg、png<br>大小：≤1024kb<!--<br>尺寸：500px*500px--></p>
+	</div>
+	<div class="col-sm-4">
+		<p class="form_error_info"
+		   ng-show="registerInfoForm.documentBackPhoto.$touched&&registerInfoForm.documentBackPhoto.$error.required">
+			证件正面照片不能为空！</p>
+		<p class="form_error_info"
+		   ng-show="imgPath.documentBackPhotoErr">
+			{{imgPath.documentBackPhotoErr}}</p>
+	</div>
+</div>
+
+<div class="form-group"
+	 ng-class="{'has-error':registerInfoForm.documentFrontPhoto.$touched&&registerInfoForm.documentFrontPhoto.$invalid}">
+	<label class="col-sm-2 control-label nowrap">证件背面照片:</label>
+	<div class="col-sm-5">
+		<!--<input type="text" class="form-control" required name="documentFrontPhoto"
+			   ng-model="registerInfo.documentFrontPhoto" placeholder="请输入证件背面照片">-->
+		
+		<!--<div class="img_in">
+			<img class="upload_img" ng-show="false" src="images/200_200.jpg" alt="">
+			<input class="input-head" id="documentFrontPhoto" required name="documentFrontPhoto" type="file" ng-model="registerInfo.documentFrontPhoto">
+		</div>-->
+		<div class="img_in" ngf-pattern="'.bmp,.jpg,.gif,.png'" ngf-max-size="5120KB"
+			 ngf-accept="'.bmp,.jpg,.gif,.png'" ngf-select="img_upload($file,'documentFrontPhoto')">
+			<img class="upload_img" tooltip-placement="right" ngf-thumbnail="imgPath.documentFrontPhoto"
+				 alt="">
+			<!--<input class="input-head" ng-change="uploadImg('documentBackPhoto')" id="documentBackPhoto" required name="documentBackPhoto" type="file" ng-model="registerInfo.documentBackPhoto">-->
+		</div>
+		<input type="hidden" ng-model="registerInfo.documentFrontPhoto" required name="documentFrontPhoto">
+		<p class="update_note">格式：jpg、png<br>大小：≤1024kb<!--<br>尺寸：500px*500px--></p>
+	</div>
+	<div class="col-sm-4">
+		<p class="form_error_info"
+		   ng-show="registerInfoForm.documentFrontPhoto.$touched&&registerInfoForm.documentFrontPhoto.$error.required">
+			证件背面照片不能为空！</p>
+	</div>
+</div>
+
+<div class="form-group" ng-if="registerInfo.type=='COMPANY'"
+	 ng-class="{'has-error':registerInfoForm.businessLicensePhoto.$touched&&registerInfoForm.businessLicensePhoto.$invalid}">
+	<label class="col-sm-2 control-label nowrap">营业执照:</label>
+	<div class="col-sm-5">
+		<!--<input type="text" class="form-control" required name="documentFrontPhoto"
+			   ng-model="registerInfo.documentFrontPhoto" placeholder="请输入营业执照">-->
+		
+		<div class="input_box">
+			<!--<div class="update_img_box">
+				<img class="upload_img" ng-show="true" src="images/200_200.jpg" alt="">
+				<a class="del_img"><i class="fa fa-close"></i></a>
+			</div>
+			<div class="update_img_box">
+				<img class="upload_img" ng-show="true" src="images/200_200.jpg" alt="">
+				<a class="del_img"><i class="fa fa-close"></i></a>
+			</div>
+			<div class="update_img_box">
+				<img class="upload_img" ng-show="true" src="images/200_200.jpg" alt="">
+				<a class="del_img"><i class="fa fa-close"></i></a>
+			</div>-->
+			<!--<div class="update_img_box active">
+				<img class="upload_img" ng-show="true" src="images/200_200.jpg" alt="">
+				<a class="del_img"><i class="fa fa-close"></i></a>
+			</div>-->
+			<!--<div class="img_in">
+				<img class="upload_img" ng-show="false" src="images/200_200.jpg" alt="">
+				<input class="input-head" id="businessLicensePhoto" required name="businessLicensePhoto" type="file" ng-model="registerInfo.businessLicensePhoto">
+			</div>-->
+			<div class="img_in" ngf-pattern="'.bmp,.jpg,.gif,.png'" ngf-max-size="5120KB"
+				 ngf-accept="'.bmp,.jpg,.gif,.png'"
+				 ngf-select="img_upload($file,'businessLicensePhoto')">
+				<img class="upload_img" tooltip-placement="right"
+					 ngf-thumbnail="imgPath.businessLicensePhoto" alt="">
+				<!--<input class="input-head" ng-change="uploadImg('documentBackPhoto')" id="documentBackPhoto" required name="documentBackPhoto" type="file" ng-model="registerInfo.documentBackPhoto">-->
+			</div>
+			<input type="hidden" ng-model="registerInfo.businessLicensePhoto" required name="businessLicensePhoto">
+			<p class="update_note">格式：jpg、png<br>大小：≤1024kb<!--<br>尺寸：500px*500px--></p>
+		</div>
+	
+	
+	</div>
+	<div class="col-sm-4">
+		<p class="form_error_info"
+		   ng-show="registerInfoForm.businessLicensePhoto.$touched&&registerInfoForm.businessLicensePhoto.$error.required">
+			营业执照不能为空！</p>
+	
+	</div>
+</div>

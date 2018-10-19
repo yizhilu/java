@@ -1,0 +1,16 @@
+.layer_notice {
+	float: left;
+	height: 75px;
+	width: 400px;
+	overflow: hidden;
+	background: #5FB878;
+	padding: 10px;
+}
+
+.layer_notice a {
+	color: #fff;
+}
+
+.layer_notice li {
+	line-height: 25px;
+}

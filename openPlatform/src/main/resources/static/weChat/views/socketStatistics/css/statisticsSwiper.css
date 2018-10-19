@@ -1,0 +1,105 @@
+		html, body {
+			position: relative;
+			height: 100%;
+		}
+		
+		body {
+			background: #fefefe;
+			font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+			font-size: 14px;
+			color: #000;
+			margin: 0;
+			padding: 0;
+		}
+		
+		.swiper-container {
+			width: 100%;
+			height: 200px;
+			margin-left: auto;
+			margin-right: auto;
+			padding: 16px 0;
+			box-sizing: border-box;
+		}
+		
+		.swiper-slide {
+			background-size: cover;
+			background-position: center;
+		}
+		
+		.gallery-top {
+			height: 100px;
+			width: 100%;
+			overflow:hidden;
+		}
+		
+		.gallery-thumbs {
+			height:auto;
+			box-sizing: border-box;
+			padding: 0;
+		}
+		
+		.gallery-thumbs .swiper-slide {
+			width: 100%;
+			height: 100%;
+			opacity: 0.4;
+		}
+		
+		.gallery-thumbs .swiper-slide-active {
+			opacity: 1;
+		}
+		
+		.gallery-top .swiper-slide {
+			
+		}
+		
+		.slide_content {
+			height: 100%;
+			overflow: hidden;
+			box-shadow: 0 3px 10px #cbd6ee;
+			border-radius: 6px;
+			box-sizing: border-box;
+			padding:28px 0;
+			background:#fff url("/weChat/images/bgbgbg.png") no-repeat left top;
+			background-size:100% auto;
+		}
+		
+		.list_box {
+			border-radius: 6px;
+			border: 1px solid #edf0f5;
+			margin: 32px 32px;
+			box-shadow: 0 3px 10px #cbd6ee;
+			height: 60px;
+			position: relative;
+			background-color: #fff;
+		}
+		.list_box p{
+			width: 100%;
+			line-height: 60px;
+			text-align: right;
+			font-size: 16px;
+			box-sizing: border-box;
+			padding-right: 30px;
+			background: url("/weChat/images/jt.png") no-repeat top right;
+			background-size: auto 100%;
+		}
+		.list_icon {
+			position: absolute;
+			top: -20px;
+			left: 16px;
+			width: 70px;
+			height: 70px;
+			border-radius: 50%;
+			box-shadow: 0 0 5px 0 rgba(153, 156, 161, 0.6);
+		}
+	    .list_icon1{
+			background: #fff url("/weChat/images/three1.png") no-repeat center;
+			background-size: 60px 60px;
+		}
+		.list_icon2{
+			background: #fff url("/weChat/images/three2.png") no-repeat center;
+			background-size: 60px 60px;
+		}
+		.list_icon3{
+			background: #fff url("/weChat/images/three3.png") no-repeat center;
+			background-size: 60px 60px;
+		}

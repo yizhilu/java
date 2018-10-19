@@ -1,0 +1,221 @@
+<style>
+.permission-list {
+    border: solid 1px #d0d0d0;
+    border-radius: 5px;
+    margin: 10px 0;
+    overflow: hidden;
+}
+
+.permission-list dt {
+    background-color: #efefef;
+    padding: 5px 10px;
+    border-bottom: 1px solid #d0d0d0;
+}
+
+.permission-list label {
+    display: block;
+    margin-bottom: 0;
+    -webkit-transition: all ease 0.5s;
+    -moz-transition: all ease 0.5s;
+    -o-transition: all ease 0.5s;
+    transition: all ease 0.5s;
+}
+
+.permission-list label:hover {
+    background-color: #f0f0f0;
+}
+
+.permission-list input {
+    float: left;
+    margin-top: 4px;
+    margin-right: 15px;
+}
+
+.permission-list dd {
+    padding: 0px 10px;
+}
+
+.permission-list dd label {
+    padding: 3px 15px;
+    border-bottom: 1px dashed #f0f0f0;
+    font-weight: normal;
+}
+
+.permission-list dl {
+    padding: 10px;
+    margin: 0;
+}
+</style>
+<div class="content_box" ng-scrollbars>
+    <h1 class="page_tit">
+        <a class="page_nav" href="javascript:void(0)" ng-click="returnPage()">用户管理</a>
+        <i class="iconfont icon-jiantou1"></i> <span class="page_current_name">修改信息</span>
+        <a class="return_page fr" ng-click="returnPage()"> <i
+            class="iconfont icon-fanhui"></i>返回
+        </a>
+    </h1>
+
+    <form class="form-horizontal" name="editMinistratorsForm">
+        <div class="form-group"
+            ng-class="{'has-error':editMinistratorsForm.userName.$touched&&editMinistratorsForm.userName.$invalid}">
+            <label class="col-sm-1 control-label nowrap">姓名:</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" required name="userName"
+                    minlength="1" maxlength="12"
+                    ng-pattern="/^[\u4e00-\u9fa5a-zA-Z0-9]+$/"
+                    ng-model="operatortory.userName" placeholder="请输入姓名">
+            </div>
+            <div class="col-sm-4">
+                <p class="form_error_info"
+                    ng-show="editMinistratorsForm.userName.$touched&&editMinistratorsForm.userName.$error.required">
+                    姓名不能为空！</p>
+                <p class="form_error_info"
+                    ng-show="editMinistratorsForm.userName.$touched&&(editMinistratorsForm.userName.$error.minlength||editMinistratorsForm.userName.$error.maxlength||editMinistratorsForm.userName.$error.pattern)">
+                    姓名长度必须为1-12个字符，大小写中英文字符或数字！</p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-1 control-label nowrap">密码:</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" name="password"
+                    value="******" placeholder="请输入密码" readonly="readonly">
+            </div>
+        </div>
+
+        <div class="form-group"
+            ng-class="{'has-error':editMinistratorsForm.password1.$touched&&editMinistratorsForm.password1.$invalid}">
+            <label class="col-sm-1 control-label nowrap">新密码:</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" required name="password1"
+                    minlength="6" maxlength="12" ng-pattern="/^[a-zA-Z0-9]+$/"
+                    ng-model="operatortory.password1" placeholder="请输入密码">
+            </div>
+            <div class="col-sm-4">
+                <p class="form_error_info"
+                    ng-show="editMinistratorsForm.password1.$touched&&editMinistratorsForm.password1.$error.required">
+                    密码不能为空！</p>
+                <p class="form_error_info"
+                    ng-show="editMinistratorsForm.password1.$touched&&(editMinistratorsForm.password1.$error.minlength||editMinistratorsForm.password1.$error.maxlength||editMinistratorsForm.userName.$error.pattern)">
+                    密码长度必须为6-12个字符，大小写英文字符或数字！</p>
+            </div>
+        </div>
+
+        <div class="form-group"
+            ng-class="{'has-error':editMinistratorsForm.password2.$touched&&editMinistratorsForm.password2.$invalid}">
+            <label class="col-sm-1 control-label nowrap">确认密码:</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" required name="password2"
+                    minlength="6" maxlength="12" ng-pattern="/^[a-zA-Z0-9]+$/"
+                    ng-model="operatortory.password2" placeholder="请输入密码">
+            </div>
+            <div class="col-sm-4">
+                <p class="form_error_info"
+                    ng-show="editMinistratorsForm.password2.$touched&&editMinistratorsForm.password2.$error.required">
+                    密码不能为空！</p>
+                <p class="form_error_info"
+                    ng-show="!editMinistratorsForm.password2.$error.required&&operatortory.password2!=operatortory.password1">
+                    两次密码不一致</p>
+                <p class="form_error_info"
+                    ng-show="editMinistratorsForm.password2.$touched&&(editMinistratorsForm.password2.$error.minlength||editMinistratorsForm.password2.$error.maxlength||editMinistratorsForm.userName.$error.pattern)">
+                    密码长度必须为6-12个字符，大小写英文字符或数字！</p>
+            </div>
+        </div>
+
+        <div class="form-group"
+            ng-class="{'has-error':editMinistratorsForm.policeId.$touched&&editMinistratorsForm.policeId.$invalid}">
+            <label class="col-sm-1 control-label nowrap">身份证号:</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" required name="policeId"
+                    minlength="1" maxlength="18" ng-model="operatortory.policeId"
+                    placeholder="请输入身份证号">
+            </div>
+            <div class="col-sm-4">
+                <p class="form_error_info"
+                    ng-show="editMinistratorsForm.policeId.$touched&&editMinistratorsForm.policeId.$error.required">
+                   身份证号不能为空！</p>
+                <p class="form_error_info"
+                    ng-show="editMinistratorsForm.policeId.$touched&&(editMinistratorsForm.policeId.$error.minlength||editMinistratorsForm.policeId.$error.maxlength)">
+                    身份证号长度必须为1-18个字符</p>
+            </div>
+        </div>
+
+        <div class="form-group"
+            ng-class="{'has-error':editMinistratorsForm.policeSpecies.$touched&&editMinistratorsForm.policeSpecies.$invalid}">
+            <label class="col-sm-1 control-label nowrap" ng-click="show()">警种:</label>
+            <div class="col-sm-5">
+                <div class="input_box">
+                    <input type="text" ng-model="jstree.name" readonly
+                        ng-click="showJs($event)" name="policeSpecieName"> <input
+                        type="hidden" ng-model="jstree.id" readonly>
+                </div>
+                <div ng-show="whetherJs" id="tree"
+                    style="background-color: #fff; border: 1px solid #17a086;">
+                    <div align="right">
+                        <a href="javascript:void(0);"><font color="#000"
+                            ng-click="hideJs()">关闭</font></a>
+                    </div>
+
+                    <div js-police-species-tree jstree="jstree" align="left"
+                        whether-js-tree="whetherJs"></div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <p class="form_error_info"
+                    ng-show="editMinistratorsForm.policeSpecies.$touched&&editMinistratorsForm.policeSpecies.$error.required">
+                    警种不能为空！</p>
+            </div>
+        </div>
+
+        <div class="form-group"
+            ng-class="{'has-error':editMinistratorsForm.agency.$touched&&editMinistratorsForm.agency.$invalid}">
+            <label class="col-sm-1 control-label nowrap">所属部门:</label>
+            <div class="col-sm-5">
+                <div class="input_box">
+                    <input type="text" ng-model="jstre.name" readonly
+                        ng-click="showJsTree($event)" name="agencyName"> <input
+                        type="hidden" ng-model="jstre.id" readonly>
+                </div>
+                <div ng-show="whetherJsTree" id="treeDiv"
+                    style="background-color: #fff; border: 1px solid #17a086;">
+                    <div align="right">
+                        <a href="javascript:void(0);"><font color="#000"
+                            ng-click="hideJsTree()">关闭</font></a>
+                    </div>
+
+                    <div js-agency-tree jstree="jstre" align="left"
+                        whether-js-tree="whetherJsTree"></div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <p class="form_error_info"
+                    ng-show="editMinistratorsForm.agency.$touched&&editMinistratorsForm.agency.$error.required">
+                    部门不能为空！</p>
+            </div>
+        </div>
+
+        <div class="form-group"
+            ng-class="{'has-error':editMinistratorsForm.personType.$touched&&editMinistratorsForm.personType.$invalid}" ng-show="false">
+            <label class="col-sm-1 control-label nowrap">人员类型:</label>
+            <div class="col-sm-5">
+                <select name="classification" class="form-control" required
+                    ng-model="operatortory.personType"
+                    ng-options="field.name as field.desc for field in fields">
+                    <option value="">请选择人员类型</option>
+                </select>
+            </div>
+            <div class="col-sm-4">
+                <p class="form_error_info"
+                    ng-show="editMinistratorsForm.personType.$touched&&editMinistratorsForm.personType.$error.required">
+                    人员类型不能为空！</p>
+            </div>
+        </div>
+    </form>
+    <div class="btn_box col-sm-5">
+        <button class="me-btn" has-permission="/v1/user/modifyUser&PATCH"
+            ng-click='editMinistrators()'
+            ng-disabled="!editMinistratorsForm.$valid"
+            ng-class="{disBtn:!editMinistratorsForm.$valid}">保存</button>
+        <button class="me-btn" ng-click="returnPage()">取消</button>
+    </div>
+</div>

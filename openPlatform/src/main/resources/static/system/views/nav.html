@@ -1,0 +1,23 @@
+<!--<div class="nav_box_box" ng-class="{active:currentNav!=''&&currentNav!=undefined}">-->
+<div class="sub_nav_box" ng-style="" ng-show="currentNav!=''&&currentNav!=undefined">
+
+	<!--角色权限管理-->
+	<ul class="navAni nav_list" ng-show="currentNav=='rolePower'">
+		<li class="nav_item" has-permission="/v1/roles/getByCondition&GET"><a ng-class="hasActive(ch,'roles')" ui-sref="me.roles">角色管理</a></li>
+		<li class="nav_item" has-permission="/v1/competence/getByCondition&GET"><a ng-class="hasActive(ch,'power')" ui-sref="me.power">权限管理</a></li>
+	</ul>
+		<!--设备管理-->
+	<ul class="navAni nav_list" ng-show="currentNav=='gatewaySocket'">
+		<li class="nav_item" has-permission="/v1/gateway/getByConditions&GET"><a ng-class="hasActive(ch,'gateway')" ui-sref="me.gateway">网关管理</a></li>
+		<li class="nav_item" has-permission="/v1/socket/getByConditions&GET"><a ng-class="hasActive(ch,'socket')" ui-sref="me.socket">插座管理</a></li>
+	</ul>
+</div>
+<div class="main_nav_box">
+	<ul class="nav_list">
+		<li class="nav_item"><a ng-class="hasActive(ch,'home')" ng-click="selectedNav('')" ui-sref="me.home"><i class="iconfont fa-home"></i>HOME</a></li>
+		<li class="nav_item" has-permission="/v1/operator/getByCondition&GET"><a ng-class="hasActive(ch,'ministrators')" ng-click="selectedNav('')" ui-sref="me.ministrators"><i class="iconfont icon-wxbzhanghu"></i>后台用户管理<i class="arrow iconfont icon-jiantou1"></i></a></li>
+		<li class="nav_item" has-permission="/v1/user/getByConditions&GET"><a ng-class="hasActive(ch,'user')" ng-click="selectedNav('')" ui-sref="me.userList"><i class="iconfont icon-wxbzhanghu"></i>平台用户管理<i class="arrow iconfont icon-jiantou1"></i></a></li>
+		<li class="nav_item" has-permission="/v1/competence/getByCondition&GET"><a ng-class="hasActive(ch,'rolePower')" ng-click="selectedNav('rolePower')"><i class="iconfont icon-role-group"></i>角色权限管理<i class="arrow iconfont icon-jiantou1"></i></a></li>
+		<li class="nav_item" has-or-permission="/v1/gateway/getByConditions&GET|/v1/socket/getByConditions&GET"><a ng-class="hasActive(ch,'gatewaySocket')" ng-click="selectedNav('gatewaySocket')"><i class="iconfont icon-role-group"></i>智能设备管理<i class="arrow iconfont icon-jiantou1"></i></a></li>
+	</ul>
+</div>

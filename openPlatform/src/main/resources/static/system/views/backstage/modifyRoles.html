@@ -1,0 +1,83 @@
+<style>
+.permission-list {
+	border: solid 1px #d0d0d0;
+	border-radius: 5px;
+	margin: 10px 0;
+	overflow: hidden;
+}
+
+.permission-list dt {
+	background-color: #efefef;
+	padding: 5px 10px;
+	border-bottom: 1px solid #d0d0d0;
+}
+
+.permission-list label {
+	display: block;
+	margin-bottom: 0;
+	-webkit-transition: all ease 0.5s;
+	-moz-transition: all ease 0.5s;
+	-o-transition: all ease 0.5s;
+	transition: all ease 0.5s;
+}
+
+.permission-list label:hover {
+	background-color: #f0f0f0;
+}
+
+.permission-list input {
+	float: left;
+	margin-top: 4px;
+	margin-right: 15px;
+}
+
+.permission-list dd {
+	padding: 0px 10px;
+}
+
+.permission-list dd label {
+	padding: 3px 15px;
+	border-bottom: 1px dashed #f0f0f0;
+	font-weight: normal;
+}
+
+.permission-list dl {
+	padding: 10px;
+	margin: 0;
+}
+</style>
+<div class="content_box" ng-scrollbars>
+	<h1 class="page_tit">
+		<a class="page_nav" href="javascript:void(0)" ng-click="returnPage()">用户管理</a>
+		<i class="iconfont icon-jiantou1"></i> <span class="page_current_name">修改角色</span>
+		<a class="return_page fr" ng-click="returnPage()"> <i
+			class="iconfont icon-fanhui"></i>返回
+		</a>
+	</h1>
+	<form class="form-horizontal" name="editMinistratorsForm">
+		<div class="form-group">
+			<label class="col-sm-1 control-label nowrap">角色:</label>
+			<div class="col-sm-5">
+				<dl class="permission-list">
+					<dd>
+						<dl class="cl permission-list2">
+							<dd>
+								<label class="m-tb-10 mr10 text-over" ng-repeat="role in roles"
+									style="display: block"> <input type="checkbox"
+									ng-model="role.isChecked">{{role.name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{role.comment}}
+								</label>
+							</dd>
+						</dl>
+					</dd>
+				</dl>
+			</div>
+		</div>
+	</form>
+	<div class="btn_box col-sm-5">
+		<button class="me-btn"
+			has-permission="/v1/security/bindRoleForUser&POST"
+			ng-click='modifyRoles()' ng-disabled="!editMinistratorsForm.$valid"
+			ng-class="{disBtn:!editMinistratorsForm.$valid}">保存</button>
+		<button class="me-btn" ng-click="returnPage()">取消</button>
+	</div>
+</div>
