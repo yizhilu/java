@@ -22,58 +22,28 @@ public class WeChatCacheServiceImpl implements WeChatCacheService {
   private WeChatCacheRepository weChatCacheRepository;
 
   @Override
-  public WeChatCacheEntity findAccessToken() {
-    return weChatCacheRepository.findByName(WeChatCacheEntity.ACCESSTOKEN);
-  }
-
-  @Override
-  public WeChatCacheEntity findJsApiTicket() {
-
-    return weChatCacheRepository.findByName(WeChatCacheEntity.JSAPITICKET);
+  public WeChatCacheEntity findByAppIdAndName(String appId, String name) {
+    Validate.notBlank(appId, "appId不能为空");
+    Validate.notBlank(name, "name不能为空");
+    return weChatCacheRepository.findByAppIdAndName(appId, name);
   }
 
   @Override
   @Transactional
-  public WeChatCacheEntity updateAccessToken(WeChatCacheEntity weChatCache) {
-    Validate.notNull(weChatCache, "微信accessToken不能为空");
-    Validate.notBlank(weChatCache.getName(), "微信weChatCache,Name为accessToken");
-    String accessToken = (String) weChatCache.getJsonObject("access_token");
-    Validate.notBlank(accessToken, "微信accessToken不能为空");
-    Validate.isTrue(weChatCache.getExpires() > 0, "微信accessToken,Expires异常");
-    Validate.notNull(weChatCache.getCreateTime(), "微信accessToken创建时间不能为空");
+  public WeChatCacheEntity update(WeChatCacheEntity weChatCache) {
+    Validate.notNull(weChatCache, "weChatCache不能为空");
+    Validate.notNull(weChatCache.getAppId(), "weChatCache的appId不能为空");
+    Validate.notNull(weChatCache.getName(), "weChatCache的name不能为空");
     // 1. 检查是否已存在
-    WeChatCacheEntity accessTokenOld = findAccessToken();
-    if (accessTokenOld == null) {
+    WeChatCacheEntity old = findByAppIdAndName(weChatCache.getAppId(), weChatCache.getName());
+    if (old == null) {
       return weChatCacheRepository.save(weChatCache);
     } else {
-      // 2. 否则 更新历史token
-      accessTokenOld.setJson(weChatCache.getJson());
-      accessTokenOld.setExpires(weChatCache.getExpires());
-      accessTokenOld.setCreateTime(weChatCache.getCreateTime());
-      return weChatCacheRepository.saveAndFlush(accessTokenOld);
+      // 2. 否则 更新历史
+      old.setJson(weChatCache.getJson());
+      old.setExpires(weChatCache.getExpires());
+      old.setCreateTime(weChatCache.getCreateTime());
+      return weChatCacheRepository.saveAndFlush(old);
     }
   }
-
-  @Override
-  @Transactional
-  public WeChatCacheEntity updateJsApiTicket(WeChatCacheEntity weChatCache) {
-    Validate.notNull(weChatCache, "微信ticket不能为空");
-    Validate.notBlank(weChatCache.getName(), "微信weChatCache,Name为jsApiTicket");
-    String ticket = (String) weChatCache.getJsonObject("ticket");
-    Validate.notBlank(ticket, "微信ticket不能为空");
-    Validate.isTrue(weChatCache.getExpires() > 0, "微信ticket,Expires异常");
-    Validate.notNull(weChatCache.getCreateTime(), "微信ticket 创建时间不能为空");
-    // 1. 检查是否已存在
-    WeChatCacheEntity ticketOld = findJsApiTicket();
-    if (ticketOld == null) {
-      return weChatCacheRepository.save(weChatCache);
-    } else {
-      // 2. 否则 更新历史ticketOld
-      ticketOld.setJson(weChatCache.getJson());
-      ticketOld.setExpires(weChatCache.getExpires());
-      ticketOld.setCreateTime(weChatCache.getCreateTime());
-      return weChatCacheRepository.saveAndFlush(ticketOld);
-    }
-  }
-
 }

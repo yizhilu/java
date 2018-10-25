@@ -17,5 +17,12 @@ public interface WeChatCacheRepository
     extends
       JpaRepository<WeChatCacheEntity, String>,
       JpaSpecificationExecutor<WeChatCacheEntity> {
-  WeChatCacheEntity findByName(String name);
+  /**
+   * 按照appid和name查询
+   * 
+   * @param appId
+   * @param name
+   * @return
+   */
+  WeChatCacheEntity findByAppIdAndName(String appId, String name);
 }

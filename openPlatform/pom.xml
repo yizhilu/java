@@ -1,16 +1,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.hecheng.wechat</groupId>
-  <artifactId>openPlatform</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>jar</packaging>
+	<groupId>com.hecheng.wechat</groupId>
+	<artifactId>openPlatform</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 
-  <name>openPlatform</name>
-  <url>http://maven.apache.org</url>
+	<name>openPlatform</name>
+	<url>http://maven.apache.org</url>
 
-  <properties>
+	<properties>
 		<java.version>1.8</java.version>
 		<java.encoding>UTF-8</java.encoding>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -33,7 +33,7 @@
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.4.5.RELEASE</version>
 	</parent>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -93,11 +93,7 @@
 			<artifactId>spring-security-oauth2</artifactId>
 		</dependency>
 
-		<!-- spring session clusters -->
-		<dependency>
-			<groupId>org.springframework.session</groupId>
-			<artifactId>spring-session</artifactId>
-		</dependency>
+
 
 		<!-- DruidDataSource -->
 		<dependency>
@@ -115,16 +111,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-freemarker</artifactId>
 		</dependency>
-
-		<!-- spring-data-redis依赖 -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-redis</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-redis</artifactId>
-		</dependency>
+		<!-- spring session clusters <dependency> <groupId>org.springframework.session</groupId> 
+			<artifactId>spring-session</artifactId> </dependency> -->
+		<!-- spring-data-redis依赖 <dependency> <groupId>org.springframework.boot</groupId> 
+			<artifactId>spring-boot-starter-redis</artifactId> </dependency> <dependency> 
+			<groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-data-redis</artifactId> 
+			</dependency> -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -138,19 +130,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-undertow</artifactId>
 		</dependency>
-		<!--mqtt -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-integration</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.integration</groupId>
-			<artifactId>spring-integration-stream</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.integration</groupId>
-			<artifactId>spring-integration-mqtt</artifactId>
-		</dependency>
+		<!--mqtt <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-integration</artifactId> 
+			</dependency> <dependency> <groupId>org.springframework.integration</groupId> 
+			<artifactId>spring-integration-stream</artifactId> </dependency> <dependency> 
+			<groupId>org.springframework.integration</groupId> <artifactId>spring-integration-mqtt</artifactId> 
+			</dependency> -->
 		<!-- emoji 表情处理 -->
 		<dependency>
 			<groupId>com.github.binarywang</groupId>
@@ -187,7 +171,11 @@
 			<artifactId>poi</artifactId>
 			<version>3.17</version>
 		</dependency>
-
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+			<version>2.0.1</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

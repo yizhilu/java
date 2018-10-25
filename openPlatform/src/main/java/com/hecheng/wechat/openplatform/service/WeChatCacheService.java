@@ -8,34 +8,19 @@ import com.hecheng.wechat.openplatform.entity.WeChatCacheEntity;
  */
 public interface WeChatCacheService {
   /**
-   * 查询系统缓存的微信的accessToken
+   * 按照appid 和name查询
    * 
+   * @param appId
    * @param name
    * @return
    */
-  WeChatCacheEntity findAccessToken();
+  WeChatCacheEntity findByAppIdAndName(String appId, String name);
 
   /**
-   * 查询系统缓存的微信的jsApiTicket
-   * 
-   * @param name
-   * @return
-   */
-  WeChatCacheEntity findJsApiTicket();
-
-  /**
-   * 如果不存在 则创建 存在则更新accessToken
+   * 如果不存在 则创建 存在则更新
    * 
    * @param WeChatCache
    * @return
    */
-  WeChatCacheEntity updateAccessToken(WeChatCacheEntity weChatCache);
-
-  /**
-   * 如果不存在 则创建 存在则更新jsApiTicke
-   * 
-   * @param WeChatCache
-   * @return
-   */
-  WeChatCacheEntity updateJsApiTicket(WeChatCacheEntity weChatCache);
+  WeChatCacheEntity update(WeChatCacheEntity weChatCache);
 }

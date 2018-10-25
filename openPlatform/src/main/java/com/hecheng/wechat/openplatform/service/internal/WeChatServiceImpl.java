@@ -4,7 +4,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import javax.transaction.Transactional;
 
@@ -14,8 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
@@ -63,8 +60,8 @@ public class WeChatServiceImpl implements WeChatService, MsgService {
   /** 缓存微信全局token */
   @Value("${weChat.cacheTokenType}")
   private String CACHETOKENTYPE;
-  @Autowired
-  private RedisTemplate<?, ?> redisTemplate;
+  // @Autowired
+  // private RedisTemplate<?, ?> redisTemplate;
 
   @Override
   public Map<String, Object> getWebPageAccessToken(String appid, String secret, String code) {
@@ -161,27 +158,30 @@ public class WeChatServiceImpl implements WeChatService, MsgService {
     // 1.如果是存储在redis 则先去redis 获取 如果有 且没有过期 直接返回，否则重新获取
     // 2.如果是存储在数据库 则先去数据库 获取 如果有 且没有过期 直接返回，否则重新获取
     if ("redis".equals(CACHETOKENTYPE)) {
-      ValueOperations<String, WeChatCacheEntity> ops =
-          (ValueOperations<String, WeChatCacheEntity>) this.redisTemplate.opsForValue();
-      WeChatCacheEntity jsApiTicket = (WeChatCacheEntity) ops.get(WeChatCacheEntity.JSAPITICKET);
-      if (!isNeedGetJsApiTicket(jsApiTicket)) {
-        return (String) jsApiTicket.getJsonObject("ticket");
-      } else {
-        Map<String, Object> jsApiTicketMap = null;
-        String access_token = getAccessToken(WECHAT_APPID, WECHAT_SECRET);
-        jsApiTicketMap = getTicket(access_token);
-        jsApiTicket = new WeChatCacheEntity();
-        String ticket = (String) jsApiTicketMap.get("ticket");
-        int expires_in = (int) jsApiTicketMap.get("expires_in");
-        jsApiTicket.setName(WeChatCacheEntity.JSAPITICKET);
-        jsApiTicket.setJson(JSONArray.toJSONString(jsApiTicketMap).toString());
-        jsApiTicket.setExpires(expires_in);
-        jsApiTicket.setCreateTime(new Date());
-        ops.set(WeChatCacheEntity.JSAPITICKET, jsApiTicket, 7000, TimeUnit.SECONDS);
-        return ticket;
-      }
+      // ValueOperations<String, WeChatCacheEntity> ops =
+      // (ValueOperations<String, WeChatCacheEntity>) this.redisTemplate.opsForValue();
+      // WeChatCacheEntity jsApiTicket = (WeChatCacheEntity) ops.get(WeChatCacheEntity.JSAPITICKET);
+      // if (!isNeedGetJsApiTicket(jsApiTicket)) {
+      // return (String) jsApiTicket.getJsonObject("ticket");
+      // } else {
+      // Map<String, Object> jsApiTicketMap = null;
+      // String access_token = getAccessToken(WECHAT_APPID, WECHAT_SECRET);
+      // jsApiTicketMap = getTicket(access_token);
+      // jsApiTicket = new WeChatCacheEntity();
+      // String ticket = (String) jsApiTicketMap.get("ticket");
+      // int expires_in = (int) jsApiTicketMap.get("expires_in");
+      // jsApiTicket.setName(WeChatCacheEntity.JSAPITICKET);
+      // jsApiTicket.setJson(JSONArray.toJSONString(jsApiTicketMap).toString());
+      // jsApiTicket.setExpires(expires_in);
+      // jsApiTicket.setCreateTime(new Date());
+      // ops.set(WeChatCacheEntity.JSAPITICKET, jsApiTicket, 7000, TimeUnit.SECONDS);
+      // return ticket;
+      // }
+      return null;
+
     } else {
-      WeChatCacheEntity jsApiTicket = weChatCacheService.findJsApiTicket();
+      WeChatCacheEntity jsApiTicket =
+          weChatCacheService.findByAppIdAndName(WECHAT_APPID, WeChatCacheEntity.JSAPITICKET);
       if (!isNeedGetJsApiTicket(jsApiTicket)) {
         return (String) jsApiTicket.getJsonObject("ticket");
       } else {
@@ -195,7 +195,7 @@ public class WeChatServiceImpl implements WeChatService, MsgService {
         jsApiTicket.setJson(JSONArray.toJSONString(jsApiTicketMap).toString());
         jsApiTicket.setExpires(expires_in);
         jsApiTicket.setCreateTime(new Date());
-        weChatCacheService.updateJsApiTicket(jsApiTicket);
+        weChatCacheService.update(jsApiTicket);
         return ticket;
       }
     }
@@ -228,26 +228,28 @@ public class WeChatServiceImpl implements WeChatService, MsgService {
     // 1.如果是存储在redis 则先去redis 获取 如果有 且没有过期 直接返回，否则重新获取
     // 2.如果是存储在数据库 则先去数据库 获取 如果有 且没有过期 直接返回，否则重新获取
     if ("redis".equals(CACHETOKENTYPE)) {
-      ValueOperations<String, WeChatCacheEntity> ops =
-          (ValueOperations<String, WeChatCacheEntity>) this.redisTemplate.opsForValue();
-      WeChatCacheEntity accessToken = (WeChatCacheEntity) ops.get(WeChatCacheEntity.ACCESSTOKEN);
-      if (!isNeedGetTocken(accessToken)) {
-        return (String) accessToken.getJsonObject("access_token");
-      } else {
-        // 重新获取token后存入redis
-        Map<String, Object> accessTokenMap = getToken(appid, secret);
-        accessToken = new WeChatCacheEntity();
-        String token = (String) accessTokenMap.get("access_token");
-        int expires_in = (int) accessTokenMap.get("expires_in");
-        accessToken.setName(WeChatCacheEntity.ACCESSTOKEN);
-        accessToken.setJson(JSONArray.toJSONString(accessTokenMap).toString());
-        accessToken.setExpires(expires_in);
-        accessToken.setCreateTime(new Date());
-        ops.set(WeChatCacheEntity.ACCESSTOKEN, accessToken, 7000, TimeUnit.SECONDS);
-        return token;
-      }
+      // ValueOperations<String, WeChatCacheEntity> ops =
+      // (ValueOperations<String, WeChatCacheEntity>) this.redisTemplate.opsForValue();
+      // WeChatCacheEntity accessToken = (WeChatCacheEntity) ops.get(WeChatCacheEntity.ACCESSTOKEN);
+      // if (!isNeedGetTocken(accessToken)) {
+      // return (String) accessToken.getJsonObject("access_token");
+      // } else {
+      // // 重新获取token后存入redis
+      // Map<String, Object> accessTokenMap = getToken(appid, secret);
+      // accessToken = new WeChatCacheEntity();
+      // String token = (String) accessTokenMap.get("access_token");
+      // int expires_in = (int) accessTokenMap.get("expires_in");
+      // accessToken.setName(WeChatCacheEntity.ACCESSTOKEN);
+      // accessToken.setJson(JSONArray.toJSONString(accessTokenMap).toString());
+      // accessToken.setExpires(expires_in);
+      // accessToken.setCreateTime(new Date());
+      // ops.set(WeChatCacheEntity.ACCESSTOKEN, accessToken, 7000, TimeUnit.SECONDS);
+      // return token;
+      // }
+      return null;
     } else {
-      WeChatCacheEntity accessToken = weChatCacheService.findAccessToken();
+      WeChatCacheEntity accessToken =
+          weChatCacheService.findByAppIdAndName(appid, WeChatCacheEntity.ACCESSTOKEN);
       if (!isNeedGetTocken(accessToken)) {
         return (String) accessToken.getJsonObject("access_token");
       } else {
@@ -260,7 +262,7 @@ public class WeChatServiceImpl implements WeChatService, MsgService {
         accessToken.setJson(JSONArray.toJSONString(accessTokenMap).toString());
         accessToken.setExpires(expires_in);
         accessToken.setCreateTime(new Date());
-        weChatCacheService.updateAccessToken(accessToken);
+        weChatCacheService.update(accessToken);
         return token;
       }
     }
@@ -360,34 +362,34 @@ public class WeChatServiceImpl implements WeChatService, MsgService {
     result.put("url", currentUrl);
     result.put("signature", 111);
     return result;
-    
-//     if(StringUtils.isBlank(currentUrl)) {
-//     return null;
-//     }
-//    
-// //获取js的签名相关信息
-//     Map<String, Object> result = null;
-//     // 获取ticket
-//     String ticket = getTicket();
-//     // 随机字符串
-//     String noncestr = UUID.randomUUID().toString();
-//     String timestamp = String.valueOf(new Date().getTime());
-//     timestamp = timestamp.substring(0, 10);
-//     String signatureValue = "jsapi_ticket=" + ticket + "&noncestr=" + noncestr + "&timestamp="
-//     + timestamp + "&url=" + currentUrl;
-//     LOG.info("signatureValue=" + signatureValue);
-//     try {
-//     String signature = SHACoder.encryptShaHex(signatureValue, null);
-//     result = new HashMap<String, Object>();
-//     result.put("appid", WECHAT_APPID);
-//     result.put("noncestr", noncestr);
-//     result.put("timestamp", timestamp);
-//     result.put("url", currentUrl);
-//     result.put("signature", signature);
-//     } catch (Exception e) {
-//     LOG.error(e.getMessage());
-//     }
-//     return result;
+
+    // if(StringUtils.isBlank(currentUrl)) {
+    // return null;
+    // }
+    //
+    // //获取js的签名相关信息
+    // Map<String, Object> result = null;
+    // // 获取ticket
+    // String ticket = getTicket();
+    // // 随机字符串
+    // String noncestr = UUID.randomUUID().toString();
+    // String timestamp = String.valueOf(new Date().getTime());
+    // timestamp = timestamp.substring(0, 10);
+    // String signatureValue = "jsapi_ticket=" + ticket + "&noncestr=" + noncestr + "&timestamp="
+    // + timestamp + "&url=" + currentUrl;
+    // LOG.info("signatureValue=" + signatureValue);
+    // try {
+    // String signature = SHACoder.encryptShaHex(signatureValue, null);
+    // result = new HashMap<String, Object>();
+    // result.put("appid", WECHAT_APPID);
+    // result.put("noncestr", noncestr);
+    // result.put("timestamp", timestamp);
+    // result.put("url", currentUrl);
+    // result.put("signature", signature);
+    // } catch (Exception e) {
+    // LOG.error(e.getMessage());
+    // }
+    // return result;
   }
 
   @Override
