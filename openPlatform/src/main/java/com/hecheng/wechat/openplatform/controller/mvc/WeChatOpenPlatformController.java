@@ -287,7 +287,8 @@ public class WeChatOpenPlatformController extends BaseController {
 
 
   /**
-   * 方法描述: 立马回应文本消息并最终触达粉丝
+   * 微信模推送给第三方平台方：文本消息，其中Content字段的内容固定为：TESTCOMPONENT_MSG_TYPE_TEXT，
+   * 第三方平台方立马回应文本消息并最终触达粉丝：Content必须固定为：TESTCOMPONENT_MSG_TYPE_TEXT_callback
    * 
    * @param content 文本
    * @param toUserName 发送接收人

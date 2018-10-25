@@ -104,7 +104,7 @@ public class WeChatOpenPlatformServiceImpl implements WeChatOpenPlatformService 
     postData.put("component_appid", componentAppid);
     postData.put("authorization_code", authorizationCode);
     String jsonStr = weChatOpenPlatformApiService.getApiQueryAuth(postData, componentAccessToken);
-    LOG.info("getAuthorizationCode=:" + jsonStr);
+    LOG.info("getApiQueryAuth=:" + jsonStr);
     JSONObject json = JSON.parseObject(jsonStr);
     Validate.isTrue(json.get("errcode") == null, jsonStr);
     JSONObject authorizationInfoJson = json.getJSONObject("authorization_info");
@@ -119,6 +119,7 @@ public class WeChatOpenPlatformServiceImpl implements WeChatOpenPlatformService 
     weChatCache.setCreateTime(new Date());
     weChatCache.setExpires(expires_in);
     weChatCache.setJson(authorizationInfoJson.toJSONString());
+    weChatCacheService.update(weChatCache);
     return authorizerAccessToken;
   }
 
