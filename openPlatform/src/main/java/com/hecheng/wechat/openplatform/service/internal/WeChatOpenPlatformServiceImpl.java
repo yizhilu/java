@@ -112,7 +112,7 @@ public class WeChatOpenPlatformServiceImpl implements WeChatOpenPlatformService 
     String authorizerAppid = authorizationInfoJson.getString("authorizer_appid");
     // 授权方接口调用凭据（在授权的公众号或小程序具备API权限时，才有此返回值），也简称为令牌
     String authorizerAccessToken = authorizationInfoJson.getString("authorizer_access_token");
-    int expires_in = json.getIntValue("expires_in");
+    int expires_in = authorizationInfoJson.getIntValue("expires_in");
     WeChatCacheEntity weChatCache = new WeChatCacheEntity();
     weChatCache.setAppId(authorizerAppid);
     weChatCache.setName(WeChatCacheEntity.AUTHORIZER_ACCESS_TOKEN);
