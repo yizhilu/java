@@ -6,7 +6,7 @@ spring:
   profiles: dev
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://127.0.0.1:3306/wechat_open_platform?characterEncoding=UTF-8
+    url: jdbc:mysql://114.55.54.96:33606/wechat_open_platform?characterEncoding=UTF-8
     username:  96test
     password:  Password@123456
     driverClassName: com.mysql.jdbc.Driver
