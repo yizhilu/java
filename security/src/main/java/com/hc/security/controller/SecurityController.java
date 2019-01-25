@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -53,9 +54,10 @@ public class SecurityController extends BaseController {
       + "客户端可以使用以下两种方式，向服务端发送SESSION属性和persistence属性：<br>"
       + "1、使用http request的header发送，类似于：persistence →YWRtaW46MTUxNDUxNzA4MjYzNjplYzI0OTFlYWEyNDhkZmIyZWIyNjNjODc3YzM2M2Q0MA 和 SESSION →54fd02c7-4067-43c9-94f8-5f6e474cd858<br>"
       + "2、使用http request的cookies发送。（此种方式是推荐使用的方式）<br>")
-  @RequestMapping(value = "/loginSuccess", method = RequestMethod.POST)
+  @RequestMapping(value = "/{principal}/loginSuccess", method = RequestMethod.POST)
   public @ApiIgnore ResponseModel loginSuccess(HttpServletRequest request,
-      HttpServletResponse response, Principal logUser) {
+      HttpServletResponse response, Principal logUser,
+      @PathVariable("principal") String principal) {
     String account = logUser.getName();
     if (StringUtils.isEmpty(account)) {
       return this.buildHttpReslutForException(new AccessDeniedException("not found op user!"));
@@ -79,8 +81,8 @@ public class SecurityController extends BaseController {
    */
   @ApiOperation(value = "由于后端提供的都是restful接口，并没有直接跳转的页面<br>"
       + "所以只要访问的url没有通过权限认证，就跳到这个请求上，并直接排除权限异常")
-  @RequestMapping(value = "/loginFail", method = {RequestMethod.GET, RequestMethod.POST})
-  public ResponseModel loginFail() throws IllegalAccessException {
+  @RequestMapping(value = "/{principal}/loginFail", method = {RequestMethod.GET, RequestMethod.POST})
+  public ResponseModel loginFail(@PathVariable("principal") String principal) throws IllegalAccessException {
     return this.buildHttpReslutForException(new IllegalAccessException("用户已失效或用户名/密码错误，请检查!"));
   }
 
@@ -88,8 +90,8 @@ public class SecurityController extends BaseController {
    * 成功登出
    */
   @ApiOperation(value = "成功登出")
-  @RequestMapping(value = "/logoutSuccess", method = RequestMethod.GET)
-  public ResponseModel logoutSuccess() {
+  @RequestMapping(value = "/{principal}/logoutSuccess", method = RequestMethod.GET)
+  public ResponseModel logoutSuccess(@PathVariable("principal") String principal) {
     return this.buildHttpReslut();
   }
 

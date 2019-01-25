@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity
 @Table(name = "goods")
@@ -50,6 +51,11 @@ public class GoodsEntity extends UuidEntity {
    */
   @Column(name = "create_date")
   private Date createDate;
+  @Column(name = "stack")
+  private int stack;
+  @Version
+  private int version;
+
 
   public String getName() {
     return name;
@@ -105,6 +111,22 @@ public class GoodsEntity extends UuidEntity {
 
   public void setCreateDate(Date createDate) {
     this.createDate = createDate;
+  }
+
+  public int getStack() {
+    return stack;
+  }
+
+  public void setStack(int stack) {
+    this.stack = stack;
+  }
+
+  public int getVersion() {
+    return version;
+  }
+
+  public void setVersion(int version) {
+    this.version = version;
   }
 
 }

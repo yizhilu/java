@@ -3,11 +3,21 @@
 spring:
   profiles: dev
   datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://127.0.0.1:3306/solr?characterEncoding=UTF-8
-    username: root
-    password: root
-    driverClassName: com.mysql.jdbc.Driver
+    primary:
+      type: com.alibaba.druid.pool.DruidDataSource
+      url: jdbc:mysql://127.0.0.1:3306/solr?characterEncoding=UTF-8
+      username: root
+      password: root
+      driverClassName: com.mysql.jdbc.Driver
+    secondary:
+      type: com.alibaba.druid.pool.DruidDataSource
+      url: jdbc:mysql://127.0.0.1:3306/secondary?characterEncoding=UTF-8
+      username: root
+      password: root
+      driverClassName: com.mysql.jdbc.Driver    
 solr:
   host: http://127.0.0.1:8088/solr/
   coreName: goods_core
+upload:
+  tempFileRoot: E:/test/temp
+  fileRoot: E:/test
