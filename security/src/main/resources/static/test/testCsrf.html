@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>test csrf</title>
+<style>
+html, body, #viewDiv {
+	padding: 0;
+	margin: 0;
+	height: 100%;
+	width: 100%;
+}
+</style>
+</head>
+<body>
+	<button id="submit">提交</button>
+	<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript">
+		function getCookie(name) {
+			var arr = document.cookie.match(new RegExp("(^| )" + name
+					+ "=([^;]*)(;|$)"));
+			if (arr != null) {
+				return decodeURIComponent(arr[2]);
+			}
+			return undefined;
+		}
+		function setCookie(name, value, options) {
+			options = options || {};
+			var expires = options.expires || null;
+			var path = options.path || "/";
+			var domain = options.domain || document.domain;
+			var secure = options.secure || null;
+			/**
+			 * document.cookie = name + "=" + escape(value) + ((expires) ? ";
+			 * expires=" + expires.toGMTString() : "") + "; path=" + path + ";
+			 * domain=" + domain ; + ((secure) ? "; secure" : "");
+			 */
+			var str = name + "=" + encodeURIComponent(value)
+					+ ((expires) ? "; expires=" + expires.toGMTString() : "")
+					+ "; path=/";
+			document.cookie = str;
+		}
+		$("#submit").on("click", function() {
+			setCookie('X-XSRF-TOKEN', 1111);
+			$.ajax({
+				type : "POST",
+				url : "/login",
+				headers : {
+					'X-XSRF-TOKEN' : 1111
+				//getCookie('X-XSRF-TOKEN')
+				},
+				data : {
+					username : "admin",
+					password : "123456",
+					//_csrf:"1111"
+				},
+				success : function(msg) {
+					console.log(msg)
+				}
+			});
+		})
+	</script>
+</body>
+</html>
