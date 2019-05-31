@@ -6,6 +6,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import io.swagger.annotations.ApiModel;
 
 /**
@@ -22,16 +25,6 @@ public class UserEntity extends UuidEntity {
   */
   private static final long serialVersionUID = 1L;
   public static final String META_VALUE = "user";
-  /**
-   * 账户
-   */
-  @Column(name = "user_name")
-  private String userName;
-  /**
-   * 密码
-   */
-  @Column(name = "password")
-  private String password;
   /**
    * 昵称
    */
@@ -57,14 +50,14 @@ public class UserEntity extends UuidEntity {
    */
   @Column(name = "last_login_date")
   private Date lastLoginDate;
-  /**
-   * 创建时间
-   */
+
+  /** 创建时间. **/
+  @CreatedDate
   @Column(name = "create_date", nullable = false)
   private Date createDate;
-  /**
-   * 最后修改时间
-   */
+
+  /** 修改时间. **/
+  @LastModifiedDate
   @Column(name = "modify_date")
   private Date modifyDate;
 
@@ -123,21 +116,4 @@ public class UserEntity extends UuidEntity {
   public void setModifyDate(Date modifyDate) {
     this.modifyDate = modifyDate;
   }
-
-  public String getUserName() {
-    return userName;
-  }
-
-  public void setUserName(String userName) {
-    this.userName = userName;
-  }
-
-  public String getPassword() {
-    return password;
-  }
-
-  public void setPassword(String password) {
-    this.password = password;
-  }
-
 }

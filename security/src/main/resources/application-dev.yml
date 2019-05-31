@@ -1,5 +1,9 @@
 ---
 ########################## dev
+server:
+  port: 9200
+  tomcat:
+    basedir: E:/test/tomcatfiletemp
 spring:
   profiles: dev
   datasource:
@@ -8,5 +12,8 @@ spring:
     username: root
     password: root
     driverClassName: com.mysql.jdbc.Driver
+filePath:
+  fileRoot: E:/test/
+  maxFileSize: 1
 author:
-  ignoreUrls: /,/home,/error,/v2/api-docs,/v1/security/loginFail,/v1/security/loginSuccess,/login,/user/login,/swagger/**,/alarmManager/**,/v1/**/**
+  ignoreUrls: /,/home,/error,/v2/api-docs,/v1/security/loginFail,/v1/security/loginSuccess,/login,/user/login,/swagger/**,/alarmManager/**,/v1/test/**,/test/**

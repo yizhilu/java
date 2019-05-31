@@ -2,6 +2,7 @@ package com.hc.security.service.security;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -9,16 +10,22 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
 
+import com.google.common.base.Objects;
+import com.hc.security.entity.AccountEntity;
+import com.hc.security.entity.OperatorEntity;
+import com.hc.security.entity.RoleEntity;
 import com.hc.security.entity.UserEntity;
-import com.hc.security.service.UserService;
+import com.hc.security.entity.enums.StatusType;
+import com.hc.security.service.AccountService;
+import com.hc.security.service.RoleService;
 
-@Service("UserSecurityDetailsService")
 public class UserSecurityDetailsService implements UserDetailsService {
 
   @Autowired
-  private UserService userService;
+  private AccountService accountService;
+  @Autowired
+  private RoleService roleService;
 
   /*
    * (non-Javadoc)
@@ -34,15 +41,35 @@ public class UserSecurityDetailsService implements UserDetailsService {
      * 3、构造UserDetails对象，并返回
      */
     // 查询用户基本信息
-    UserEntity currentUser = this.userService.findByUserName(username);
-    if (currentUser == null) {
-      throw new UsernameNotFoundException("没有发现指定的账号，或者账号状态不正确！");
+    AccountEntity currentAccount = this.accountService.findByUserName(username);
+    if (currentAccount == null) {
+      throw new UsernameNotFoundException("没有发现指定的账号！");
+    }
+    if (!Objects.equal(StatusType.STATUS_NORMAL, currentAccount.getStatus())) {
+      throw new UsernameNotFoundException("账号已被禁用，请联系管理员！");
+    }
+    UserEntity user = accountService.findUserByAccountId(currentAccount.getId());
+    OperatorEntity operator = accountService.findOperatorByAccountId(currentAccount.getId());
+    if (user == null && operator == null) {
+      throw new UsernameNotFoundException("账号是一个空号！");
     }
     List<SimpleGrantedAuthority> authorities = new LinkedList<>();
-    SimpleGrantedAuthority authoritie = new SimpleGrantedAuthority("ROLE_ANONYMOUS");
-    authorities.add(authoritie);
+    if (user != null) {
+      SimpleGrantedAuthority authoritie = new SimpleGrantedAuthority("ROLE_ANONYMOUS");
+      authorities.add(authoritie);
+    } else {
+      // 查询用户角色信息
+      Set<RoleEntity> roles = this.roleService.findByOperatorId(operator.getId());
+      if (roles == null || roles.isEmpty()) {
+        throw new UsernameNotFoundException("用户权限状态错误，请联系客服人员！");
+      }
+      for (RoleEntity role : roles) {
+        SimpleGrantedAuthority authoritie = new SimpleGrantedAuthority(role.getName());
+        authorities.add(authoritie);
+      }
+    }
     // 角色信息形成authorities集合对象
-    UserDetails securityDetails = new User(username, currentUser.getPassword(), authorities);
+    UserDetails securityDetails = new User(username, currentAccount.getPassword(), authorities);
     return securityDetails;
   }
 }

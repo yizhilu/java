@@ -7,7 +7,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.hc.security.entity.OperatorEntity;
-import com.hc.security.entity.enums.StatusType;
 
 
 public interface OperatorDao {
@@ -51,13 +50,4 @@ public interface OperatorDao {
    * @return Page<OperatorEntity>
    */
   Page<OperatorEntity> findOperatorByParmas(Map<String, Object> map, Pageable pageable);
-
-  /**
-   * 按照登陆账号和状态查询指定的平台操作者
-   * 
-   * @param username 登陆账号
-   * @param statusType 状态
-   * @return
-   */
-  OperatorEntity findByAccountAndStatus(String username, StatusType statusType);
 }

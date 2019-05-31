@@ -43,7 +43,7 @@ public class OperatorDaoImpl implements OperatorDao {
 
   @Override
   public void updateLoginTime(String account, Date loginTime) {
-    operatorRepository.updateLoginTime(account, loginTime);
+    // operatorRepository.updateLoginTime(account, loginTime);
   }
 
   @Override
@@ -78,10 +78,4 @@ public class OperatorDaoImpl implements OperatorDao {
     operatorList = this.operatorRepository.findAll(querySpecifi, pageable);
     return operatorList;
   }
-
-  @Override
-  public OperatorEntity findByAccountAndStatus(String username, StatusType statusType) {
-    return operatorRepository.findByAccountAndStatus(username, statusType);
-  }
-
 }

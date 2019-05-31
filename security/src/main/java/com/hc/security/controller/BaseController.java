@@ -18,7 +18,6 @@ import com.hc.security.controller.model.ResponseCode;
 import com.hc.security.controller.model.ResponseModel;
 import com.hc.security.entity.OperatorEntity;
 import com.hc.security.entity.UuidEntity;
-import com.hc.security.entity.enums.StatusType;
 import com.hc.security.service.OperatorService;
 
 
@@ -28,12 +27,13 @@ public class BaseController {
    * 日志
    */
   private static final Logger LOG = LoggerFactory.getLogger(BaseController.class);
-  
+
   @Autowired
   private OperatorService operatorService;
-  
+
   /**
    * 获取登陆者账号
+   * 
    * @param operator
    * @return
    */
@@ -43,93 +43,100 @@ public class BaseController {
     Validate.notBlank(account, "not found op user!");
     return account;
   }
-  
+
   /**
    * 当异常状况时，使用该方法构造返回值
+   * 
    * @param e 错误的异常对象描述
    * @return 组装好的异常结果
    */
   protected ResponseModel buildHttpReslutForException(Exception e) {
     String errorMsg = "";
-    if(e != null) {
+    if (e != null) {
       errorMsg = e.getMessage();
     }
-    
-    ResponseModel result = new ResponseModel(new Date().getTime(), null, ResponseCode._501, errorMsg);
+
+    ResponseModel result =
+        new ResponseModel(new Date().getTime(), null, ResponseCode._501, errorMsg);
     return result;
   }
-  
+
   /**
    * 构造http返回信息
+   * 
    * @see #filterProperties(UuidEntity, String...)
    * @param properties
    * @return
    */
-  protected <T extends UuidEntity> ResponseModel buildHttpReslut(Iterable<T> page, String... properties) {
+  protected <T extends UuidEntity> ResponseModel buildHttpReslut(Iterable<T> page,
+      String... properties) {
     ResponseModel result = new ResponseModel(new Date().getTime(), null, ResponseCode._200, null);
-    
-    if(page == null || properties == null) {
+
+    if (page == null || properties == null) {
       result.setData(page);
       return result;
     }
-    
+
     page.forEach(item -> {
       filterProperties(item, properties);
     });
-    
+
     result.setData(page);
     return result;
   }
-  
+
   /**
    * 构造http返回信息
+   * 
    * @see #filterProperties(UuidEntity, String...)
-   * @return 
+   * @return
    */
-  protected <T extends UuidEntity> ResponseModel buildHttpReslut(Collection<T> entities, String... properties) {
+  protected <T extends UuidEntity> ResponseModel buildHttpReslut(Collection<T> entities,
+      String... properties) {
     ResponseModel result = new ResponseModel(new Date().getTime(), null, ResponseCode._200, null);
-    
-    if(entities == null || entities.isEmpty()
-        || properties == null) {
+
+    if (entities == null || entities.isEmpty() || properties == null) {
       result.setData(entities);
       return result;
     }
-    
+
     for (T entity : entities) {
       filterProperties(entity, properties);
     }
-    
+
     result.setData(entities);
     return result;
   }
-  
+
   /**
    * 构造http返回信息
+   * 
    * @param entity 返回的业务处理结果
    * @param properties 要去除的属性
    * @return
    */
   protected <T extends UuidEntity> ResponseModel buildHttpReslut(T entity, String... properties) {
     ResponseModel result = new ResponseModel(new Date().getTime(), null, ResponseCode._200, null);
-    if(entity == null || properties == null) {
+    if (entity == null || properties == null) {
       return result;
     }
-    
+
     // 过滤
     this.filterProperties(entity, properties);
-    
+
     result.setData(entity);
     return result;
   }
-  
+
   /**
    * 该方法不返回任何信息，只是告诉调用者，调用业务成功了。
+   * 
    * @return
    */
   protected ResponseModel buildHttpReslut() {
     return new ResponseModel(new Date().getTime(), null, ResponseCode._200, null);
   }
-  
+
   /**
    * 验证操作者是否登陆，是否是运营商平台操作者
    * 
@@ -139,16 +146,18 @@ public class BaseController {
   protected OperatorEntity verifyOperatorLogin(Principal operator) {
     String account = getPrincipalAccount(operator);
     // 验证是否是商家用户
-    OperatorEntity currentOp = this.operatorService.findByAccountAndStatus(account , StatusType.STATUS_NORMAL);
-    return currentOp;
+    // OperatorEntity currentOp = this.operatorService.findByAccountAndStatus(account ,
+    // StatusType.STATUS_NORMAL);
+    return null;
   }
-  
+
   /**
    * 该工具用来去除实体对象中的属性关联。支持集合内部的对象属性去除。<br>
    * 注意，进行属性引用去除的对象必须是UuidEntity的子类示例对象
+   * 
    * @param object 目标对象
    * @param properties 要去除的属性<br>
-   * <pre>
+   *        <pre>
    * <example>
    *   // 以下代码可以去除currentRole中直接引用的5个属相
    *   this.filterProperty
@@ -161,144 +170,147 @@ public class BaseController {
    * </pre>
    */
   private <T extends UuidEntity> void filterProperties(T entity, String... properties) {
-    if(entity == null || properties == null) {
+    if (entity == null || properties == null) {
       return;
     }
-    
+
     /*
-     * 首先要对初始输入的属性列表进行初步处理：
-     * 1、排序
-     * 2、确定这个属性是在第几层对象中
-     * */
+     * 首先要对初始输入的属性列表进行初步处理： 1、排序 2、确定这个属性是在第几层对象中
+     */
     // 1、排序
     Arrays.sort(properties);
-    
+
     // 2、递归排除指定的属性
     Stack<Class<?>> stackClasses = new Stack<>();
     try {
       for (String property : properties) {
         stackClasses.push(entity.getClass());
-        filterProperty(property , entity , stackClasses);
+        filterProperty(property, entity, stackClasses);
         stackClasses.pop();
       }
     } catch (Exception e) {
       LOG.error(e.getMessage(), e);
     }
   }
-  
+
   /**
    * 过滤相关属性
+   * 
    * @param property
    * @param currentObject
-   * @throws SecurityException 
-   * @throws NoSuchMethodException 
-   * @throws InvocationTargetException 
-   * @throws IllegalArgumentException 
-   * @throws IllegalAccessException 
+   * @throws SecurityException
+   * @throws NoSuchMethodException
+   * @throws InvocationTargetException
+   * @throws IllegalArgumentException
+   * @throws IllegalAccessException
    */
-  private void filterProperty(String property , Object currentObject , Stack<Class<?>> stackClasses) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+  private void filterProperty(String property, Object currentObject, Stack<Class<?>> stackClasses)
+      throws NoSuchMethodException, SecurityException, IllegalAccessException,
+      IllegalArgumentException, InvocationTargetException {
     // 如果条件成立，说明还要进入下一级对象，否则就是操作本级对象
     int nodeIndex;
-    if((nodeIndex = property.indexOf(".")) != -1) {
-      String currentFieldName = property.substring(0,nodeIndex);
-      String nextFieldName = property.substring(nodeIndex+1);
+    if ((nodeIndex = property.indexOf(".")) != -1) {
+      String currentFieldName = property.substring(0, nodeIndex);
+      String nextFieldName = property.substring(nodeIndex + 1);
       Field currentField = null;
       Class<?> fieldClass = null;
       Class<?> currentClass = null;
       try {
-        currentField = this.findField(currentFieldName , currentObject.getClass());
-        if(currentField == null) {
+        currentField = this.findField(currentFieldName, currentObject.getClass());
+        if (currentField == null) {
           return;
         }
         fieldClass = currentField.getType();
         currentClass = currentObject.getClass();
       } catch (NoSuchFieldException | SecurityException e) {
-        throw new IllegalArgumentException("not found property: " + currentFieldName + " in object " + currentObject.getClass().getName());
+        throw new IllegalArgumentException("not found property: " + currentFieldName + " in object "
+            + currentObject.getClass().getName());
       }
-      
+
       // 取得下一级对象
       char[] chars = currentFieldName.toCharArray();
       chars[0] -= 32;
       Method getMethod = currentClass.getMethod("get" + String.valueOf(chars));
       Object nextObject = getMethod.invoke(currentObject);
-      
+
       /*
-       * 那么是不是进入内部呢？还要以以下判断条件为准:
-       * 1、这个属性必须是UuidEntity的子类
-       * 2、这个属性本来不为null
-       * 3、这个属性所对应的类没有在已进入的递归列表中
-       * */
+       * 那么是不是进入内部呢？还要以以下判断条件为准: 1、这个属性必须是UuidEntity的子类 2、这个属性本来不为null 3、这个属性所对应的类没有在已进入的递归列表中
+       */
       // 如果条件成立，说明是单一对象
-      if(nextObject != null && nextObject instanceof UuidEntity
+      if (nextObject != null && nextObject instanceof UuidEntity
           && !stackClasses.contains(fieldClass)) {
         stackClasses.push(fieldClass);
-        filterProperty(nextFieldName , nextObject , stackClasses);
+        filterProperty(nextFieldName, nextObject, stackClasses);
         stackClasses.pop();
-      } 
+      }
       // 如果条件成立，说明这个属性是一个集合
-      else if(nextObject != null && nextObject instanceof Collection) {
-        Collection<?> collections = (Collection<?>)nextObject;
+      else if (nextObject != null && nextObject instanceof Collection) {
+        Collection<?> collections = (Collection<?>) nextObject;
         for (Object propertyObject : collections) {
           Class<?> propertyClass = propertyObject.getClass();
-          if(!(propertyObject instanceof UuidEntity)) {
+          if (!(propertyObject instanceof UuidEntity)) {
             break;
           }
           stackClasses.push(propertyClass);
-          filterProperty(nextFieldName , propertyObject , stackClasses);
+          filterProperty(nextFieldName, propertyObject, stackClasses);
           stackClasses.pop();
         }
       }
-    } 
+    }
     // 就在本级对象进行属性排除
-    else { 
+    else {
       String currentFieldName = property;
       Field currentField = null;
       Class<?> fieldClass = null;
       Class<?> currentClass = null;
       try {
-        currentField = this.findField(currentFieldName , currentObject.getClass());
-        if(currentField == null) {
+        currentField = this.findField(currentFieldName, currentObject.getClass());
+        if (currentField == null) {
           return;
         }
         fieldClass = currentField.getType();
         currentClass = currentObject.getClass();
       } catch (NoSuchFieldException | SecurityException e) {
-        throw new IllegalArgumentException("not found property: " + currentFieldName + " in object " + currentObject.getClass().getName());
+        throw new IllegalArgumentException("not found property: " + currentFieldName + " in object "
+            + currentObject.getClass().getName());
       }
-      
+
       // 如果执行到这里，就可以将属性设置为null了
       char[] chars = currentFieldName.toCharArray();
       chars[0] -= 32;
-      Method getMethod = currentClass.getMethod("set" + String.valueOf(chars) , fieldClass);
-      getMethod.invoke(currentObject , new Object[]{null});
-    } 
+      Method getMethod = currentClass.getMethod("set" + String.valueOf(chars), fieldClass);
+      getMethod.invoke(currentObject, new Object[] {null});
+    }
   }
-  
+
   /**
    * 该私有方法查询指定类中的指定字段名
+   * 
    * @param currentFieldName
    * @param targetClass
    * @return
    * @throws NoSuchFieldException
    * @throws SecurityException
    */
-  private Field findField(String currentFieldName , Class<?> targetClass) throws NoSuchFieldException {
+  private Field findField(String currentFieldName, Class<?> targetClass)
+      throws NoSuchFieldException {
     Field currentField = null;
     try {
       currentField = targetClass.getDeclaredField(currentFieldName);
     } catch (NoSuchFieldException | SecurityException e) {
-      
+
     }
-    
-    if(currentField == null) {
+
+    if (currentField == null) {
       Class<?> superClass = targetClass.getSuperclass();
-      if(superClass != null) {
+      if (superClass != null) {
         return this.findField(currentFieldName, superClass);
       } else {
-        throw new NoSuchFieldException("not found property " + currentFieldName + " in class " + targetClass.getSimpleName());
+        throw new NoSuchFieldException(
+            "not found property " + currentFieldName + " in class " + targetClass.getSimpleName());
       }
     }
-    
+
     return currentField;
   }
 }

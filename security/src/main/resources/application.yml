@@ -16,7 +16,7 @@ spring:
     charset: UTF-8
     expose-request-attributes: true
     expose-session-attributes: true
-    suffix: .ftl
+    suffix: .ftl,.html
 #swagger
 swagger:
   version: v0.0.9

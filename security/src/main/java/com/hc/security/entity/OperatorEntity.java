@@ -36,14 +36,6 @@ public class OperatorEntity extends UuidEntity {
 
   private static final long serialVersionUID = -5744634769875803775L;
 
-  /** 账号. **/
-  @Column(name = "account", unique = true, nullable = false)
-  private String account = "";
-
-  /** 密码. **/
-  @Column(name = "password", length = 128, nullable = false)
-  private String password = "";
-
   /** 姓名. **/
   @Column(name = "name", length = 64, nullable = false)
   private String name = "";
@@ -98,10 +90,6 @@ public class OperatorEntity extends UuidEntity {
   @Column(name = "is_del")
   private boolean isDel = false;
 
-  public String getAccount() {
-    return account;
-  }
-
   public String getRealName() {
     return realName;
   }
@@ -132,18 +120,6 @@ public class OperatorEntity extends UuidEntity {
 
   public void setRoles(Set<RoleEntity> roles) {
     this.roles = roles;
-  }
-
-  public void setAccount(String account) {
-    this.account = account;
-  }
-
-  public String getPassword() {
-    return password;
-  }
-
-  public void setPassword(String password) {
-    this.password = password;
   }
 
   public String getName() {

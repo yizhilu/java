@@ -23,15 +23,6 @@ public interface OperatorService {
   void deleteOperatorById(String operatorId, OperatorEntity operator);
 
   /**
-   * 该方法用于按照用户名查询指定的平台操作者
-   * 
-   * @param username 用户名账户
-   * @param statusType 用户状态
-   */
-  OperatorEntity findByAccountAndStatus(String username, StatusType statusType);
-
-
-  /**
    * 通过id获取管理员
    * 
    * @param operatorId 管理员id
@@ -74,5 +65,14 @@ public interface OperatorService {
    * @param flag 判断该次操作是禁用还是启用。true为启用
    */
   void disableOrUsable(String operatorId, boolean flag, OperatorEntity modifyUser);
+
+  /**
+   * 按账号查询正常的操作者
+   * 
+   * @param account
+   * @param status
+   * @return
+   */
+  OperatorEntity findByAccountAndStatus(String account, StatusType status);
 
 }
