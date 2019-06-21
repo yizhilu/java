@@ -7,6 +7,8 @@ import java.security.Principal;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Stack;
 
 import org.apache.commons.lang3.Validate;
@@ -58,6 +60,17 @@ public class BaseController {
 
     ResponseModel result =
         new ResponseModel(new Date().getTime(), null, ResponseCode._501, errorMsg);
+    return result;
+  }
+
+  protected ResponseModel buildHttpCryptoReslut(Object obj) {
+    Map<String, Object> map = new HashMap<>();
+    ResponseModel result = null;
+    if (obj != null) {
+      map.put("result", obj);
+      return new ResponseModel(new Date().getTime(), map, ResponseCode._200, null);
+    }
+    result = new ResponseModel(new Date().getTime(), obj, ResponseCode._200, null);
     return result;
   }
 

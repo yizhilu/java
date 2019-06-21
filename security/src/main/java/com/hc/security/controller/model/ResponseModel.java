@@ -1,5 +1,7 @@
 package com.hc.security.controller.model;
 
+import java.util.Date;
+
 /**
  * 统一返回数据对象（对本次请求执行的操作结果是否成功 进行描述 flag=1时执行成功）
  * 
@@ -19,6 +21,18 @@ public class ResponseModel {
   /** 异常信息描述 */
   private String errorMsg;
 
+  public ResponseModel() {
+    this.timestemp = new Date().getTime();
+    this.data = null;
+    this.responseCode = ResponseCode._200;
+    this.errorMsg = null;
+  }
+  public ResponseModel(Object data) {
+    this.timestemp = new Date().getTime();
+    this.data = data;
+    this.responseCode = ResponseCode._200;
+    this.errorMsg = null;
+  }
   public ResponseModel(Long timestemp, Object data, ResponseCode responseCode, String errorMsg) {
     this.timestemp = timestemp;
     this.data = data;

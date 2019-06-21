@@ -4,7 +4,7 @@ import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.hc.security.entity.AccountEntity;
@@ -27,7 +27,7 @@ public class AccountServiceImpl implements AccountService {
   @Autowired
   private AccountUserRepository accountUserRepository;
   @Autowired
-  private Md5PasswordEncoder passwordEncoder;
+  private PasswordEncoder passwordEncoder;
 
   @Override
   public AccountEntity findByUserName(String userName) {
@@ -82,7 +82,7 @@ public class AccountServiceImpl implements AccountService {
     Validate.notBlank(account.getUserName(), "账号名不能为空");
     Validate.notBlank(account.getPassword(), "账号密码不能为空");
     // 加密密码
-    String encodePassword = passwordEncoder.encodePassword(account.getPassword(), null);
+    String encodePassword = passwordEncoder.encode(account.getPassword());
     account.setPassword(encodePassword);
     return accountRepository.save(account);
   }

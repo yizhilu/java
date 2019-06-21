@@ -23,7 +23,7 @@ import springfox.documentation.annotations.ApiIgnore;
  * 和权限安全相关的接口，在这里暴露<br>
  */
 @RestController
-@RequestMapping("/v1/security")
+@RequestMapping("/web/security")
 public class SecurityController extends BaseController {
 
   @Autowired

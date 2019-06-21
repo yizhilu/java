@@ -65,6 +65,9 @@ public class AccountEntity extends UuidEntity {
   @Column(name = "modify_date")
   private Date modifyDate;
 
+  @Column(name = "last_password_reset_date")
+  private Date lastPasswordResetDate;
+
   public String getUserName() {
     return userName;
   }
@@ -111,6 +114,14 @@ public class AccountEntity extends UuidEntity {
 
   public void setStatus(StatusType status) {
     this.status = status;
+  }
+
+  public Date getLastPasswordResetDate() {
+    return lastPasswordResetDate;
+  }
+
+  public void setLastPasswordResetDate(Date lastPasswordResetDate) {
+    this.lastPasswordResetDate = lastPasswordResetDate;
   }
 
 }

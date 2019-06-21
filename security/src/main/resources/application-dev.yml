@@ -1,7 +1,8 @@
 ---
 ########################## dev
+debug: true
 server:
-  port: 9200
+  port: 8080
   tomcat:
     basedir: E:/test/tomcatfiletemp
 spring:
@@ -12,8 +13,28 @@ spring:
     username: root
     password: root
     driverClassName: com.mysql.jdbc.Driver
+  crypto:
+    serverPrivateKey: MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBALIZ98KqgLW8IMt4G+N+4d3DiOiEa+5s6lCMSGE/NbU9stJEqw0EuCP54MY6JkT0HCYTCrLXqww6rSQyWF7BNCVGssk2XDcvSKiCz1ZMgabd6XVK5kvIycySydXQ0Ky6rnfxw8w2mllHABFvs1eamaHQozv18n/XGqemjW2BFy/jAgMBAAECgYAxT3FCi3SBXKnzy7hk/z9H6Bhi0C8V3z/stzpe+mJDYOa+wtZdD15wT4HFQFpSIwgcHo+Kvp2UEDbZ27qN2Y43AZbF9LOalWTRUzYtr8wL8MIbgtew/QQ9YFNWdkTZ6MxCItjD/mSz3Lrkcphvbsx4VoCVYIJ04r+Loi0t9g0guQJBANvkpfrq0bLVRYWfaigjkx47mr0trJkB7mjADe69IqtsM/2x5dHPpClDK78yzAWxU2BrYzOd31QIOm32iMIvRxUCQQDPWJPMOzcq8Jqs1PAM7D0hxnvF3tSJB0CJCQWdGFkJiuIYSbrWnCVF78jJyU2AK1H3RDi9BzGPL2Z3i2Si+9kXAkAPnKtAJl3fEY9PDmNuGCCA3AB/f/eqIV345/HVSm5kt1j1oSTNAa4JE/DOMWAU42MlDFrNtl69y5vCZOeOyeaFAkBOJieGmWcAozDZJWTYqg2cdk/eU08t2nLjc2gPPscIRrVSzC9EhhOyWV8HVv0D6s/471inPlfajNYFBp/Goj+/AkEAiejHX/58Vv8+ccW22RMZmyxiHcZpTw9hz7vHUCWv03+fyVGtGMhJ4xuPt8UaZm91yHSPWWarM8Xa7errKaXN9A==
+    serverPublicKey: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCyGffCqoC1vCDLeBvjfuHdw4johGvubOpQjEhhPzW1PbLSRKsNBLgj+eDGOiZE9BwmEwqy16sMOq0kMlhewTQlRrLJNlw3L0iogs9WTIGm3el1SuZLyMnMksnV0NCsuq538cPMNppZRwARb7NXmpmh0KM79fJ/1xqnpo1tgRcv4wIDAQAB
+    clientPublicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAk6KG3wxiU/xJPDsJGAppb+uO3XKwvrfo4R9JRYo+7zqFb8yPFAbQ5bkXVftV93GGhKIFbBc+bvgniDdjxHPYSLrPi576wC5LhVud5dx0IFIpeRZjaCG4HV5Nubxkfe37JiyPfbrQ4/pAHHyuNmUP06YoczOJvMFJP1LkXTjD2La7SYTBGHDqrVlWIeFReEfA6agPT45066ZLHlkXruIFVCx8OxKeeQPAKmf2NA1ThAZ/VBwswoLPJsPC1yCOvMlJloDlUq8LNP1sWC0CWmqlvILiVvuL8byuCfkrvOQTiRl5FJMjygEz8CJxU2/tUCsTCVpHxSQtF2vjTdnrA1I97wIDAQAB
+    debug: false
+    apiEncryptUriIgnoreList: POST:/test3
+    
 filePath:
   fileRoot: E:/test/
   maxFileSize: 1
+
 author:
-  ignoreUrls: /,/home,/error,/v2/api-docs,/v1/security/loginFail,/v1/security/loginSuccess,/login,/user/login,/swagger/**,/alarmManager/**,/v1/test/**,/test/**
+  app:
+    ignoreUrls: /test/**
+  web:
+    ignoreUrls: /,/home,/error,/v2/api-docs,/v1/security/loginFail,/v1/security/loginSuccess,/login,/user/login,/swagger/**,/alarmManager/**,/v1/test/**,/test2
+jwt:  
+  header: Authorization
+  secret: mySecret
+  #(秒)
+  expiration: 300
+  route:
+    authentication:
+      path: /auth
+      refresh: /refresh
