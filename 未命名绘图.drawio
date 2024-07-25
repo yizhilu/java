@@ -1,0 +1,148 @@
+<mxfile host="app.diagrams.net" modified="2024-07-25T06:32:07.466Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36" etag="nmfgxgGfPU2EHX-5xfGX" version="24.7.0" type="github">
+  <diagram name="第 1 页" id="3Ea16pjSRtLBONaqwwWJ">
+    <mxGraphModel dx="1068" dy="642" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-3" value="" style="rounded=0;whiteSpace=wrap;html=1;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="30" width="600" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-4" value="业务A" style="rounded=1;whiteSpace=wrap;html=1;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" vertex="1" parent="1">
+          <mxGeometry x="306" y="40" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-5" value="业务B" style="rounded=1;whiteSpace=wrap;html=1;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="40" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-7" value="接入方" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" vertex="1" parent="1">
+          <mxGeometry x="190" y="50" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-11" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="150" width="600" height="490" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-13" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="680" width="600" height="65.5" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-14" value="邮件" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="250" y="687.75" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-15" value="短信" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="390" y="687.75" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-16" value="站内信" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="530" y="687.75" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-17" value="消息渠道" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="170" y="697.75" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-18" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="180" y="250" width="240" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-19" value="消息模版" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="190" y="280" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-20" value="消息查询" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="309" y="350" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-21" value="任务管理" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="190" y="350" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-22" value="渠道管理" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="309" y="280" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-23" value="敏感词服务" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="190" y="420" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-25" value="发送配置" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="309" y="420" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-26" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="450" y="260" width="135" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-27" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="180" y="500" width="250" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-28" value="消息失败数" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="190" y="530" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-29" value="消息发送数" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="309" y="530" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-30" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="470" y="500" width="270" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-31" value="优先消息" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="485" y="530" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-32" value="发送消息" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="610" y="530" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-34" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="610" y="260" width="135" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-36" value="消息记录" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="540" y="585" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-37" value="消息渠道分布" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="250" y="585" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-38" value="应用接入" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="470" y="310" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-40" value="敏感词告警" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="627.5" y="310" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-44" value="配置管理" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="190" y="250" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-45" value="渠道接入" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="470" y="390" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-46" value="接入管理" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="460" y="260" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-47" value="告警管理" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="620" y="260" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-48" value="发送日志" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="627.5" y="390" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-50" value="消息推送" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="480" y="500" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-54" value="消息报表" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="190" y="500" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-55" value="....." style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="660" y="697.75" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-8" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="170" y="170" width="580" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-42" value="API&amp;nbsp;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" vertex="1" parent="1">
+          <mxGeometry x="170" y="190" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-9" value="应用鉴权" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="220" y="180" width="85" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-10" value="消息发送" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="318.5" y="180" width="81" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-12" value="记录查询" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="409" y="180" width="83" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-61" value="用户消息查询" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="505" y="180" width="80" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-62" value="消息已读回执" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="600" y="180" width="80" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-64" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="QcjqNsh5DKlcaw6GTF3m-3" target="QcjqNsh5DKlcaw6GTF3m-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="QcjqNsh5DKlcaw6GTF3m-65" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.49;entryY=-0.031;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="QcjqNsh5DKlcaw6GTF3m-11" target="QcjqNsh5DKlcaw6GTF3m-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
